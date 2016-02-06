@@ -1,0 +1,24 @@
+@page {
+	size: landscape;
+}
+
+.hide-on-print{
+	display: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid gainsboro !important;
+    font-size: 10px !important;
+}
+
+.panel {
+	border: none !important;	
+}
+
+div {
+	border: none;
+}

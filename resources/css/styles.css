@@ -1,0 +1,44 @@
+.notification-count {
+	position: absolute;
+    top: 10px;
+    right: 0px;
+    background-color: #FB5050;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50px;
+    color: white;
+}
+
+.row{
+	margin-bottom: 5px !important;
+}
+
+.btn {
+    margin-right: 3px !important;
+    margin-bottom: 3px !important;
+}
+
+.registerform input {
+	text-transform: uppercase;
+}
+
+.user-image {
+    min-width: 50px;
+    width: 50px;
+    max-width: 50px;
+    
+    min-height: 50px;
+    height: 50px;
+    max-height: 50px;
+    
+    border-radius: 50%;
+}
+
+.captcha label {
+	display: none;
+}
+
+#captcha_code {
+	margin-top: 10px;
+}
