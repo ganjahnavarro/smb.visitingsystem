@@ -29,7 +29,6 @@
 				$address = strip_tags ( $_POST ['address'] );
 				$genderr = strip_tags ( $_POST ['gender'] );
 				$department = strip_tags ( $_POST ['department'] );
-				$floor = strip_tags ( $_POST ['floor'] );
 				$purpose = strip_tags ( $_POST ['purpose'] );
 				$person = strip_tags ( $_POST ['person'] );
 				$date = date ( "Y-m-d" );
@@ -39,7 +38,7 @@
 				$issuedby = $_SESSION ['sess_username'];
 
 				if ($submit) {
-				    if ($firstname && $lastname && $genderr && $address && $department && $floor && $purpose && $person && $date && $timein) {
+				    if ($firstname && $lastname && $genderr && $address && $department && $purpose && $person && $date && $timein) {
 				        if (strlen ($firstname) >25||strlen ($lastname) >25||strlen ($address) >25) {
 							echo "<div class='alert alert-danger' role='alert'>Max limit for First name, Last name, and Company/Address are 25 characters</div>";
 						} else  {
@@ -48,8 +47,8 @@
 							
 							$highest_id = mysql_result(mysql_query("SELECT coalesce(MAX(id), 0) + 1 FROM visitinfo"), 0) or die(mysql_error());
 							
-							$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, floor, purpose, persontovisit, date, timein, passno, issuedby)
-									VALUES ('$highest_id', '$department', '$floor', '$purpose', '$person', '$date', '$timein', '$passno', '$issuedby')") or die(mysql_error());
+							$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, purpose, persontovisit, date, timein, passno, issuedby)
+									VALUES ('$highest_id', '$department', '$purpose', '$person', '$date', '$timein', '$passno', '$issuedby')") or die(mysql_error());
 							
 							$querywalkin = mysql_query("INSERT INTO walkinvisitors(firstname, lastname, gender, address, visitinfoid)
 									VALUES ('$firstname', '$lastname', '$genderr', '$address', '$highest_id')") or die(mysql_error());
@@ -144,28 +143,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-3 text-left">
-									<h5>
-										<strong>Floor
-									</h5>
-								</div>
-								<div class="col-md-8">
-									<select class="form-control " name='floor' required>
-										<option></option>
-										<option value="1st Floor">1ST FLOOR</option>
-										<option value="2nd Floor">2ND FLOOR</option>
-										<option value="3rd Floor">3RD FLOOR</option>
-										<option value="4th Floor">4TH FLOOR</option>
-										<option value="5th Floor">5TH FLOOR</option>
-										<option value="6th Floor">6TH FLOOR</option>
-										<option value="7th Floor">7TH FLOOR</option>
-										<option value="8th Floor">8TH FLOOR</option>
-									</select>
-								</div>
-							</div>
-						</div>
+						
 						<div class="row">
 							<div class="form-group">
 								<div class="col-md-3 text-left">

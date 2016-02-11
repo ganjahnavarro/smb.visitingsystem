@@ -14,9 +14,9 @@
 					mysql_select_db ($database) or die(mysql_error());
 					$output = '';
 
-					$query = mysql_query ("SELECT *, w.department as dept, w.floor as flr from appointments a
+					$query = mysql_query ("SELECT *, w.department as dept from appointments a
 						left join visitinfo v on a.visitinfoid = v.id
-						left join walkthroughs w on v.floor = w.floor and v.department = w.department
+						left join walkthroughs w on v.department = w.department
 						where w.active = true and (a.status = 'APPROVED' or a.status = 'RESCHEDULED')
 						and a.userid = '$userId' ORDER BY w.id DESC LIMIT 1");
 
@@ -30,7 +30,6 @@
 							$name = $row ['name'];
 							$description = $row ['description'];
 							$link = $row ['link'];
-							$floor = $row ['flr'];
 							$department = $row ['dept'];
 
 							echo "<div class='well'>
@@ -38,7 +37,6 @@
 									<iframe width='100%' height='350' src='" . $link . "' frameborder='0' allowfullscreen></iframe>
 									<p class='help-block'>Description: " . $description . "</p>
 									<p class='help-block'>Department: " . $department . "</p>
-									<p class='help-block'>Floor: " . $floor . "</p>
 								</div>";
 						}
 					}

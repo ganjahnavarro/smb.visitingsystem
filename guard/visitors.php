@@ -87,7 +87,6 @@
 							<th class='active'>PERSON TO VISIT</th>
 							<th class='active'>PURPOSE TO VISIT</th>
 							<th class='active'>DEPARTMENT</th>
-							<th class='active'>FLOOR</th>
 							<th class='active'>DATE</th>
 							<th class='active'>TIME IN</th>
 							<th class='active'>TIME OUT</th>
@@ -131,7 +130,6 @@
 									$lname = $row ['lastname'];
 									$add = $row ['address'];
 									$dep = $row ['department'];
-									$flo = $row ['floor'];
 									$pur = $row ['purpose'];
 									$per = $row ['persontovisit'];
 									$date = $row ['date'];
@@ -150,7 +148,7 @@
 
 									echo "<tr class='h6'><td>" . $fname . " " . $lname . "</td>
 											<td>" . $add . "</td> <td>" . $per . "</td> <td>" . $pur . "</td> <td>" . $dep . "</td>
-											<td>" . $flo . "</td> <td>" . $date . "</td> <td>" . $time . "</td> <td>" . $timeout . "</td>
+											<td>" . $date . "</td> <td>" . $time . "</td> <td>" . $timeout . "</td>
 											<td>" . $passno . "</td> <td>" . $issuedby . "</td> <td class='hide-on-print'>" . $actionButton . "</td>";
 								}
 							}
@@ -191,7 +189,6 @@
 									$lname = $row ['lname'];
 									$add = $row ['address'];
 									$dep = $row ['department'];
-									$flo = $row ['floor'];
 									$pur = $row ['purpose'];
 									$per = $row ['persontovisit'];
 									$date = $row ['vdate'];
@@ -210,7 +207,7 @@
 
 									echo "<tr class='h6'><td>" . $fname . " " . $lname . "</td>
 											<td>" . $add . "</td> <td>" . $per . "</td> <td>" . $pur . "</td> <td>" . $dep . "</td>
-											<td>" . $flo . "</td> <td>" . $date . "</td> <td>" . $time . "</td> <td>" . $timeout . "</td>
+											<td>" . $date . "</td> <td>" . $time . "</td> <td>" . $timeout . "</td>
 											<td>" . $passno . "</td> <td>" . $issuedby . "</td> <td class='hide-on-print'>" . $actionButton . "</td>";
 								}
 							}

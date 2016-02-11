@@ -55,7 +55,6 @@
 					$name = $row ['name'];
 					$description = $row ['description'];
 					$link = $row ['link'];
-					$floor = $row ['floor'];
 					$department = $row ['department'];
 
 					$actionButton = "";
@@ -77,7 +76,6 @@
 							<div class='pull-right'>" . $actionButtonEdit . $actionButtonChangeStatus . "</div>
 							<p class='help-block'>Description: " . $description . "</p>
 							<p class='help-block'>Department: " . $department . "</p>
-							<p class='help-block'>Floor: " . $floor . "</p>
 						</div>";
 				}
 			}

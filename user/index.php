@@ -27,11 +27,10 @@
 		} else if (isset ( $_POST ['submit'] )) {
 			$submit = $_POST ['submit'];
 			$department = strip_tags ( $_POST ['department'] );
-			$floor = strip_tags ( $_POST ['floor'] );
 			$purpose = strip_tags ( $_POST ['purpose'] );
 			$person = strip_tags ( $_POST ['person'] );
 
-		    if ($department && $floor && $purpose && $person) {
+		    if ($department && $purpose && $person) {
 		    	$datetime = $_POST ['datetime'];
 		    	$pieces = explode(' ', $datetime);
 		    	$rescheddate = strtotime($pieces[0]);
@@ -43,8 +42,8 @@
 
 				$highest_id = mysql_result(mysql_query("SELECT coalesce(MAX(id), 0) + 1 FROM visitinfo"), 0) or die(mysql_error());
 
-				$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, floor, purpose, persontovisit)
-						VALUES ('$highest_id', '$department', '$floor', '$purpose', '$person')") or die(mysql_error());
+				$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, purpose, persontovisit)
+						VALUES ('$highest_id', '$department', '$purpose', '$person')") or die(mysql_error());
 
 				$querywalkin = mysql_query("INSERT INTO appointments(requesteddate, requestedtime, status, userid, visitinfoid)
 						VALUES ('$mysqldate', '$pieces[1]', 'PENDING', '$userId', '$highest_id')") or die(mysql_error());

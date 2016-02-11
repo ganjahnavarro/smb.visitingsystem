@@ -43,7 +43,6 @@
 					$description = strip_tags ( $_POST ['description'] );
 					$link = strip_tags ( $_POST ['link'] );
 					$department = strip_tags ( $_POST ['department'] );
-					$floor = strip_tags ( $_POST ['floor'] );
 
 					if ($submit) {
 						if ($name && $link) {
@@ -54,10 +53,10 @@
 
 							if($id != null){
 								$queryreg = mysql_query ("UPDATE walkthroughs set name = '$name', description = '$description',
-										link = '$link', department = '$department', floor = '$floor' where id = '$id'" ) or die(mysql_error());
+										link = '$link', department = '$department' where id = '$id'" ) or die(mysql_error());
 							} else {
-								$queryreg = mysql_query ("INSERT INTO walkthroughs(name, description, link, department, floor)
-									VALUES ('$name', '$description', '$link', '$department', '$floor')" ) or die(mysql_error());
+								$queryreg = mysql_query ("INSERT INTO walkthroughs(name, description, link, department)
+									VALUES ('$name', '$description', '$link', '$department')" ) or die(mysql_error());
 							}
 							echo"<div class='alert alert-success' role='alert'>Save successful</div>";
 						} else
@@ -96,22 +95,6 @@
 							<option value="PACKAGING DEPARTMENT">PACKAGING DEPARTMENT</option>
 							<option value="ENGINEERING DEPARTMENT">ENGINEERING DEPARTMENT</option>
 							<option value="ADMIN DEPARTMENT">ADMIN DEPARTMENT</option>
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label>FLOOR</label>
-						<select class="form-control" name='floor' required>
-							<option></option>
-							<option></option>
-							<option value="1st Floor">1ST FLOOR</option>
-							<option value="2nd Floor">2ND FLOOR</option>
-							<option value="3rd Floor">3RD FLOOR</option>
-							<option value="4th Floor">4TH FLOOR</option>
-							<option value="5th Floor">5TH FLOOR</option>
-							<option value="6th Floor">6TH FLOOR</option>
-							<option value="7th Floor">7TH FLOOR</option>
-							<option value="8th Floor">8TH FLOOR</option>
 						</select>
 					</div>
 

@@ -43,27 +43,6 @@
 						<div class="form-group">
 							<div class="col-md-4 text-left">
 								<h5>
-									<strong>Floor</strong>
-								</h5>
-							</div>
-							<div class="col-md-8 pad-bottom">
-								<select class="form-control" name='floor' required>
-									<option></option>
-									<option value="1st Floor">1ST FLOOR</option>
-									<option value="2nd Floor">2ND FLOOR</option>
-									<option value="3rd Floor">3RD FLOOR</option>
-									<option value="4th Floor">4TH FLOOR</option>
-									<option value="5th Floor">5TH FLOOR</option>
-									<option value="6th Floor">6TH FLOOR</option>
-									<option value="7th Floor">7TH FLOOR</option>
-									<option value="8th Floor">8TH FLOOR</option>
-								</select>
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<div class="col-md-4 text-left">
-								<h5>
 									<strong>Purpose</strong>
 								</h5>
 							</div>

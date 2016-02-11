@@ -19,7 +19,6 @@
 						<table class='table table-condensed text-uppercase small sortableTable'>
 							<thead>
 								<th class='active'>DEPARTMENT</th>
-								<th class='active'>FLOOR</th>
 								<th class='active'>PURPOSE</th>
 								<th class='active'>PERSON TO VISIT</th>
 								<th class='active'>DATE</th>
@@ -48,7 +47,6 @@
 									while ( $row = mysql_fetch_array ( $query ) ) {
 										$id = $row ['pk'];
 										$dep = $row ['department'];
-										$flo = $row ['floor'];
 										$pur = $row ['purpose'];
 										$per = $row ['persontovisit'];
 										$date = $row ['appointmentdate'];
@@ -64,7 +62,7 @@
 												<button class='btn btn-info'><span class='glyphicon glyphicon-time'></span></button></a>";
 										}
 
-										echo "<tr class='h6'><td>" . $dep . "</td> <td>" . $flo . "</td> <td>" . $pur . "</td> <td>" . $per . "</td>
+										echo "<tr class='h6'><td>" . $dep . "</td> <td>" . $pur . "</td> <td>" . $per . "</td>
 											<td>" . $date . "</td> <td>" . $time . "</td> <td>" . $referenceno . "</td>
 											<td>" . $status . "</td> <td>" . $actionButton . "</td>";
 									}

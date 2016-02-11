@@ -69,7 +69,6 @@
 						<th class='active'>PERSON TO VISIT</th>
 						<th class='active'>PURPOSE TO VISIT</th>
 						<th class='active'>DEPARTMENT</th>
-						<th class='active'>FLOOR</th>
 						<th class='active'>DATE</th>
 						<th class='active'>TIME</th>
 						<th class='active'>REFERENCE NO</th>
@@ -97,7 +96,6 @@
 							$lname = $row ['lname'];
 							$add = $row ['address'];
 							$dep = $row ['department'];
-							$flo = $row ['floor'];
 							$pur = $row ['purpose'];
 							$per = $row ['persontovisit'];
 							$date = $row ['appointmentdate'];
@@ -111,7 +109,7 @@
 
 							echo "<tr class='h6'><td>" . $fname . " " . $lname . "</td>
 								<td>" . $add . "</td> <td>" . $per . "</td> <td>" . $pur . "</td> <td>" . $dep . "</td>
-								<td>" . $flo . "</td> <td>" . $date . "</td> <td>" . $time . "</td>
+								<td>" . $date . "</td> <td>" . $time . "</td>
 								<td>" . $referenceno . "</td> <td>" . $processedby . "</td> <td>" . $actionButton . "</td>";
 						}
 					}
