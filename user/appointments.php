@@ -97,11 +97,18 @@
 
 			<form action="index.php" method="POST">
 				<input id="appointmentId" name="appointmentId" type="hidden">
-
+				
 				<div class="modal-body">
 					<p class="text-center text-uppercase">
 						ARE YOU SURE DO YOU WANT TO CANCEL THIS APPOINTMENT?
 					</p>
+					
+					<div class="form-group">
+						<p>
+							<b>REASON</b>
+						</p>
+						<textarea class="form-control" name='cancelreason' required="required"></textarea>
+					</div>
 				</div>
 
 				<div class="modal-footer">

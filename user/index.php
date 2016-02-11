@@ -21,14 +21,22 @@
 			mysql_select_db ($database) or die(mysql_error());
 
 			$id = $_POST ['appointmentId'];
-			$sql = "UPDATE appointments SET status = 'CANCELLED' WHERE ID = '$id'";
+			$cancelreason = $_POST ['cancelreason'];
+			
+			$sql = "UPDATE appointments SET status = 'CANCELLED', cancelreason = '$cancelreason' WHERE ID = '$id'";
 			$res = mysql_query ($sql) or die(mysql_error());
 			header ('Location: index.php');
 		} else if (isset ( $_POST ['submit'] )) {
 			$submit = $_POST ['submit'];
 			$department = strip_tags ( $_POST ['department'] );
-			$purpose = strip_tags ( $_POST ['purpose'] );
 			$person = strip_tags ( $_POST ['person'] );
+			
+			$purpose = strip_tags ( $_POST ['purpose'] );
+			$otherpurpose = strip_tags ( $_POST ['otherpurpose'] );
+			
+			if($purpose == 'OTHERS'){
+				$purpose = $otherpurpose;
+			}
 
 		    if ($department && $purpose && $person) {
 		    	$datetime = $_POST ['datetime'];
@@ -192,14 +200,24 @@
 
 		$(function() {
 			$("#datetime").datetimepicker({
-				controlType: 'select',
-				stepMinute: 5,
-				oneLine: true
+				controlType : 'select',
+				stepMinute : 5,
+				oneLine : true,
+				minDate : +3
 			});
 		});
+
+		$("#purpose").change(function() {
+			if($(this).val() == 'OTHERS'){
+				$("#otherpurpose").show();
+			} else {
+				$("#otherpurpose").hide();
+			}
+		}
 
 		localStorage.setItem("retryCount", 0);
 		init();
 	</script>
+	
 </body>
 </html>

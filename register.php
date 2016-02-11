@@ -17,7 +17,6 @@
 			$fname = strip_tags ( $_POST ['fname'] );
 			$mname = strip_tags ( $_POST ['mname'] );
 			$lname = strip_tags ( $_POST ['lname'] );
-			$age = strip_tags ( $_POST ['age'] );
 			$bday = strip_tags ( $_POST ['bday'] );
 			$gender = strip_tags ( $_POST ['gender'] );
 			$address = strip_tags ( $_POST ['address'] );
@@ -31,7 +30,7 @@
 			date_default_timezone_set ( 'Asia/Manila' );
 			$time = date ( 'h:i A' );
 
-			if ($fname && $mname && $lname && $age && $bday && $gender && $address && $contact
+			if ($fname && $mname && $lname && $bday && $gender && $address && $contact
 					&& $username && $password && $confirm && $date && $time) {
 
 				if ($password == $confirm) {
@@ -52,9 +51,9 @@
 						} else {
 							$imageFileName = $imageFileName == null ? 'placeholder.png' : $imageFileName;
 							
-							$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, age, bday, gender,
+							$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, bday, gender,
 									address, contact, username, password, type, date, time, imageFileName, question, answer)
-									VALUES ('$fname','$mname','$lname','$age','$bday','$gender',
+									VALUES ('$fname','$mname','$lname','$bday','$gender',
 									'$address','$contact','$username','$password', 'DEFAULT','$date','$time', '$imageFileName', '$question', '$answer')" ) or die(mysql_error());
 							
 							echo "<div class='alert alert-success' role='alert'>Registration successful.</div>";
@@ -108,12 +107,6 @@
 				<label>LASTNAME</label>
 				<input class="form-control" name='lname' required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
 					value="<?php if(isset($lname)){ echo $lname;} ?>">
-			</div>
-	
-			<div class="form-group col-md-4">
-				<label>AGE</label>
-				<input class="form-control" type="number" name='age' required min="0"
-					value="<?php if(isset($age)){ echo $age;} ?>">
 			</div>
 	
 			<div class="form-group col-md-4">

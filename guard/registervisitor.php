@@ -29,7 +29,14 @@
 				$address = strip_tags ( $_POST ['address'] );
 				$genderr = strip_tags ( $_POST ['gender'] );
 				$department = strip_tags ( $_POST ['department'] );
+				
 				$purpose = strip_tags ( $_POST ['purpose'] );
+				$otherpurpose = strip_tags ( $_POST ['otherpurpose'] );
+				
+				if($purpose == 'OTHERS'){
+					$purpose = $otherpurpose;
+				}
+				
 				$person = strip_tags ( $_POST ['person'] );
 				$date = date ( "Y-m-d" );
 				date_default_timezone_set ( 'Asia/Manila' );
@@ -109,6 +116,7 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="row">
 							<div class="form-group">
 								<div class="col-md-3 text-left">
@@ -123,6 +131,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="col-md-6">
 						<h3>Person To Visit</h3>
 						<br>
@@ -148,11 +157,11 @@
 							<div class="form-group">
 								<div class="col-md-3 text-left">
 									<h5>
-										<strong>Purpose
+										<strong>Purpose</strong>
 									</h5>
 								</div>
 								<div class="col-md-8">
-									<select class="form-control " name='purpose' required>
+									<select id="purpose" class="form-control" name='purpose' required>
 										<option></option>
 										<option value="EMPLOYEE / OJT">EMPLOYEE / OJT</option>
 										<option value="TRAINING / SEMINAR">TRAINING / SEMINAR</option>
@@ -170,6 +179,20 @@
 								</div>
 							</div>
 						</div>
+						
+						<div id="otherpurpose" class="row">
+							<div class="form-group">
+								<div class="col-md-3 text-left">
+									<h5>
+										<strong>Please Specify</strong>
+									</h5>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control " name='otherpurpose' required>
+								</div>
+							</div>
+						</div>
+						
 						<div class="row">
 							<div class="form-group">
 								<div class="col-md-3 text-left">
@@ -212,5 +235,16 @@
 	</form>
 
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php' ); ?>
+	
+	<script>
+		$("#purpose").change(function() {
+			if($(this).val() == 'OTHERS'){
+				$("#otherpurpose").show();
+			} else {
+				$("#otherpurpose").hide();
+			}
+		}
+	</script>
+	
 	</body>
 </html>

@@ -177,6 +177,7 @@
 							<th class='active'>DATE</th>
 							<th class='active'>TIME</th>
 							<th class='active'>STATUS</th>
+							<th class='active'>REASON</th>
 							<th class='active'>PROCESSED BY</th>
 		
 							<?php
@@ -205,6 +206,7 @@
 									$date = $row ['date'];
 									$time = $row ['time'];
 									$status = $row ['status'];
+									$cancelreason = $row ['cancelreason'];
 									$processedby = $row ['processedby'];
 									
 									echo "<tr class='h6'>
@@ -212,7 +214,7 @@
 										<td>" . $fname . " " . $lname . "</td>
 										<td>" . $add . "</td> <td>" . $per . "</td> <td>" . $pur . "</td> <td>" . $dep . "</td>
 										<td>" . $date . "</td> <td>" . $time . "</td>
-										<td>" . $status . "</td> <td>" . $processedby . "</td>";
+										<td>" . $status . "</td> <td>" . $cancelreason . "</td> <td>" . $processedby . "</td>";
 								}
 							}
 							?>

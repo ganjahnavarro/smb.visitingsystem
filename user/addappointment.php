@@ -47,7 +47,7 @@
 								</h5>
 							</div>
 							<div class="col-md-8 pad-bottom">
-								<select class="form-control" name='purpose' required>
+								<select id="purpose" class="form-control" name='purpose' required>
 									<option></option>
 									<option value="EMPLOYEE / OJT">EMPLOYEE / OJT</option>
 									<option value="TRAINING / SEMINAR">TRAINING / SEMINAR</option>
@@ -62,6 +62,19 @@
 									<option value="PAYMENT">PAYMENT</option>
 									<option value="OTHERS">OTHERS</option>
 								</select>
+							</div>
+						</div>
+						
+						<div id="otherpurpose" class="row">
+							<div class="form-group">
+								<div class="col-md-3 text-left">
+									<h5>
+										<strong>Please Specify</strong>
+									</h5>
+								</div>
+								<div class="col-md-8">
+									<input type="text" class="form-control " name='otherpurpose' required>
+								</div>
 							</div>
 						</div>
 							
