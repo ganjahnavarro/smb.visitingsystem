@@ -90,126 +90,117 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
                 <form action='adduser.php' method='POST' name='form'>
                 	<input name="id" type="hidden" value="<?php if($ispkset){ echo $row['id'];} ?>">
 
-					<div class="form-group">
-						<h4>PERSONAL INFORMATION</h4>
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<h4>PERSONAL INFORMATION</h4>
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>IMAGE</label>
+							<input class="form-control" type="file" name="imageUpload" id="imageUpload" required>
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>FIRST NAME</label>
+							<input class="form-control" name='fname' required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
+								value="<?php if(isset($fname)){ echo $fname;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>MIDDLE NAME</label>
+							<input class="form-control" name='mname' required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
+								value="<?php if(isset($mname)){ echo $mname;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>LASTNAME</label>
+							<input class="form-control" name='lname' required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
+								value="<?php if(isset($lname)){ echo $lname;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>AGE</label>
+							<input class="form-control" type="number" name='age' required min="0"
+								value="<?php if(isset($age)){ echo $age;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>BIRTHDAY</label>
+							<input class="form-control" type="date" name='bday' required
+								value="<?php if(isset($bday)){ echo $bday;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>GENDER</label>
+							<select class="form-control" name='gender' required>
+								<option></option>
+								<option value="Male" <?php if(isset($gender) && $gender == 'Male'){ echo 'selected';} ?>>Male</option>
+								<option value="Female" <?php if(isset($gender) && $gender == 'Female'){ echo 'selected';} ?>>Female</option>
+							</select>
+						</div>
+				
+						<div class="form-group col-md-6">
+							<label>ADDRESS</label>
+							<input class="form-control" name='address' required
+								value="<?php if(isset($address)){ echo $address;} ?>">
+						</div>
+						<br/>
 					</div>
 					
-					<div class="form-group">
-						<p>
-							<b>FIRSTNAME</b>
-						</p>
-						<input class="form-control" name='fname'
-							required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
-							value="<?php if($ispkset){ echo $row['fname'];} ?>">
-					</div>
-					<p></p>
-					<div class="form-group ">
-						<p>
-							<b>MIDDLE NAME</b>
-						</p>
-						<input class="form-control" name='mname' required
-							required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
-							value="<?php if($ispkset){ echo $row['mname'];} ?>">
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>LASTNAME</b>
-						</p>
-						<input class="form-control" name='lname' required
-							required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
-							value="<?php if($ispkset){ echo $row['gender'];} ?>">
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>AGE</b>
-						</p>
-						<input class="form-control" type="number" name='age' required min="0"
-							 value="<?php if($ispkset){ echo $row['age'];} ?>">
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>BIRTHDAY</b>
-						</p>
-						<input class="form-control" type="date" name='bday' required
-							 value="<?php if($ispkset){ echo $row['bday'];} ?>">
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>GENDER</b>
-						</p>
-						<select class="form-control" name='gender' required>
-							<option></option>
-							<option value="Male" <?php if($ispkset && $row['gender'] == 'Male'){ echo 'selected';} ?>>Male</option>
-							<option value="Female" <?php if($ispkset && $row['gender'] == 'Female'){ echo 'selected';} ?>>Female</option>
-						</select>
-					</div>
-					<p></p>
-					<div class="form-group ">
-						<p>
-							<b>ADDRESS</b>
-						</p>
-						<input class="form-control" name='address' required
-							 value="<?php if($ispkset){ echo $row['address'];} ?>">
-					</div>
-					<br />
-					<div class="form-group">
-						<h4>ACCOUNT INFORMATION</h4>
-					</div>
-					<div class="form-group">
-						<p>
-							<b>CONTACT NO.</b>
-						</p>
-						<input type="number" class="form-control" name='contact' required min="0"
-							 value="<?php if($ispkset){ echo $row['contact'];} ?>">
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>USER TYPE</b>
-						</p>
-						<select class="form-control" name='usertype' required>
-							<option></option>
-							<option value="DEFAULT" <?php if($ispkset && $row['type'] == 'DEFAULT'){ echo 'selected';} ?>>DEFAULT</option>
-							<option value="GUARD" <?php if($ispkset && $row['type'] == 'GUARD'){ echo 'selected';} ?>>GUARD</option>
-							<option value="HR" <?php if($ispkset && $row['type'] == 'HR'){ echo 'selected';} ?>>HR</option>
-							<option value="ADMIN" <?php if($ispkset && $row['type'] == 'ADMIN'){ echo 'selected';} ?>>ADMIN</option>
-						</select>
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>USERNAME</b>
-						</p>
-						<input type="text" class="form-control text-uppercase" name="username" required
-							pattern="^.{8,}$" title="Minimum of 8 characters is required."
-							value="<?php if($ispkset){ echo $row['username'];} ?>">
-						<div id="feedback"></div>
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>PASSWORD</b>
-						</p>
-						<input type="password" class="form-control" name='password' required
-							pattern="^.{6,}$" title="Minimum of 6 characters is required."
-							value="<?php if($ispkset){ echo $row['password'];} ?>">
-					</div>
-					<p></p>
-					<div class="form-group">
-						<p>
-							<b>CONFIRM PASSWORD</b>
-						</p>
-						<input type="password" class="form-control" name='confirm' required
-							pattern="^.{6,}$" title="Minimum of 6 characters is required."
-							value="<?php if($ispkset){ echo $row['password'];} ?>">
-					</div>
-					<br />
-					<div class="form-group">
-						<input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="SUBMIT">
+					<div class="row">
+						<div class="form-group col-xs-12">
+							<h4>ACCOUNT INFORMATION</h4>
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label>USERNAME</label>
+							<input type="text" class="form-control text-uppercase" name="username" required
+								pattern="^.{8,}$" title="Minimum of 8 characters is required."
+								value="<?php if(isset($username)){ echo $username;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>EMAIL</label>
+							<input type="email" class="form-control" name='email' required
+								value="<?php if(isset($email)){ echo $email;} ?>">
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label>CONTACT NO.</label>
+							<input type="number" class="form-control" name='contact' required min="0"
+								value="<?php if(isset($contact)){ echo $contact;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>PASSWORD</label>
+							<input type="password" class="form-control" name='password' required
+								pattern="^.{6,}$" title="Minimum of 6 characters is required."
+								value="<?php if(isset($password)){ echo $password;} ?>">
+						</div>
+				
+						<div class="form-group col-md-4">
+							<label>CONFIRM PASSWORD</label>
+							<input type="password" class="form-control" name='confirm' required
+								pattern="^.{6,}$" title="Minimum of 6 characters is required."
+								value="<?php if(isset($confirm)){ echo $confirm;} ?>">
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label>USER TYPE</label>
+							<select class="form-control" name='usertype' required>
+								<option></option>
+								<option value="DEFAULT" <?php if($ispkset && $row['type'] == 'DEFAULT'){ echo 'selected';} ?>>DEFAULT</option>
+								<option value="GUARD" <?php if($ispkset && $row['type'] == 'GUARD'){ echo 'selected';} ?>>GUARD</option>
+								<option value="HR" <?php if($ispkset && $row['type'] == 'HR'){ echo 'selected';} ?>>HR</option>
+								<option value="ADMIN" <?php if($ispkset && $row['type'] == 'ADMIN'){ echo 'selected';} ?>>ADMIN</option>
+							</select>
+							<br/>
+						</div>
+						
+						<div class="form-group col-xs-12">
+							<input type="submit" class="btn btn-info btn-lg btn-block" name="submit" value="SUBMIT">
+						</div>
+						<br/> <br/>
 					</div>
 				</form>
 			</div>

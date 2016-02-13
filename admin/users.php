@@ -70,6 +70,7 @@
 	                    <th class='active'>BIRTHDAY</th>
 	                    <th class='active'>ADDRESS</th>
 	                    <th class='active'>CONTACT NO</th>
+	                    <th class='active'>EMAIL</th>
 	                    <th class='active'>DATE ADDED</th>
 						<th class='active hide-on-print' width="120px">ACTION</th>
 					</thead>
@@ -98,6 +99,7 @@
 							$bday = $row ['bday'];
 							$add = $row ['address'];
 							$contact = $row ['contact'];
+							$email = $row ['email'];
 							$date = $row ['date'];
 							$time = $row ['time'];
 							$imageFileName = $row ['imageFileName'];
@@ -119,7 +121,7 @@
 									<td>" . $username . "</td> <td>" . $active . "</td> <td>" . $type . "</td>
 									<td>" . $fname . " " . $mname . " " . $lname . "</td>
 									<td>" . $gender . "</td> <td>" . $age . "</td> <td>" . $bday . "</td> <td>" . $add . "</td>
-									<td>" . $contact . "</td> <td> <p title='$time'> " . $date . " </p> </td>
+									<td>" . $contact . "</td> <td>" . $email . "</td> <td> <p title='$time'> " . $date . " </p> </td>
 									<td class='hide-on-print'>" . $actionButtonEdit . $actionButtonChangeStatus . "</td>";
 						}
 					}

@@ -21,9 +21,8 @@
 			$gender = strip_tags ( $_POST ['gender'] );
 			$address = strip_tags ( $_POST ['address'] );
 			$contact = strip_tags ( $_POST ['contact'] );
+			$email = strip_tags ( $_POST ['email'] );
 			$username = strip_tags ( $_POST ['username'] );
-			$question = strip_tags ( $_POST ['question'] );
-			$answer = strip_tags ( $_POST ['answer'] );
 			$password = strip_tags ( $_POST ['password'] );
 			$confirm = strip_tags ( $_POST ['confirm'] );
 			$date = date ( "Y-m-d" );
@@ -31,7 +30,7 @@
 			$time = date ( 'h:i A' );
 
 			if ($fname && $mname && $lname && $bday && $gender && $address && $contact
-					&& $username && $password && $confirm && $date && $time) {
+				&& $username && $email && $password && $confirm && $date && $time) {
 
 				if ($password == $confirm) {
 					require_once $_SERVER['DOCUMENT_ROOT'] . '/secureimage/securimage.php';
@@ -49,14 +48,34 @@
 						if($existingusername > 0){
 							echo "<div class='alert alert-danger' role='alert'>Username already exists.</div>";
 						} else {
+							$length = 64;
+							$token = bin2hex(openssl_random_pseudo_bytes($length));
+							
 							$imageFileName = $imageFileName == null ? 'placeholder.png' : $imageFileName;
 							
-							$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, bday, gender,
-									address, contact, username, password, type, date, time, imageFileName, question, answer)
-									VALUES ('$fname','$mname','$lname','$bday','$gender',
-									'$address','$contact','$username','$password', 'DEFAULT','$date','$time', '$imageFileName', '$question', '$answer')" ) or die(mysql_error());
+							$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, age, bday, gender,
+									address, contact, username, email, password, type, date, time, imageFileName, verification_token)
+									VALUES ('$fname', '$mname', '$lname', '$age', '$bday', '$gender',
+									'$address', '$contact', '$username', '$email', '$password', 'DEFAULT', '$date', '$time', '$imageFileName', '$token')" ) or die(mysql_error());
 							
-							echo "<div class='alert alert-success' role='alert'>Registration successful.</div>";
+							echo "<div class='alert alert-success' role='alert'>Registration successful. Please check your inbox/spam in your email for verification.</div>";
+							
+							
+							require_once $_SERVER["DOCUMENT_ROOT"] . "/mail.php";
+							
+							$recipient = $address;
+							
+							$headers["From"] = "noreply@rhcloud.com";
+							$headers["To"] = $recipient;
+							
+							$headers["Subject"] = "SMB Brewery";
+							$body = "Please verify your account by clicking on this link. \n
+http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&token=" . $token;
+							
+							$params["sendmail_path"] = "/usr/lib/sendmail";
+							$mail =& Mail::factory("sendmail", $params);
+							$result = $mail->send($recipient, $headers, $body);
+							//var_dump($result);
 						}
 					}
 				} else {
@@ -137,58 +156,39 @@
 				<h4>ACCOUNT INFORMATION</h4>
 			</div>
 			
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-4">
 				<label>USERNAME</label>
 				<input type="text" class="form-control text-uppercase" name="username" required
 					pattern="^.{8,}$" title="Minimum of 8 characters is required."
 					value="<?php if(isset($username)){ echo $username;} ?>">
 			</div>
 	
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-4">
+				<label>EMAIL</label>
+				<input type="email" class="form-control" name='email' required
+					value="<?php if(isset($email)){ echo $email;} ?>">
+			</div>
+			
+			<div class="form-group col-md-4">
 				<label>CONTACT NO.</label>
 				<input type="number" class="form-control" name='contact' required min="0"
 					value="<?php if(isset($contact)){ echo $contact;} ?>">
 			</div>
 	
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-4">
 				<label>PASSWORD</label>
 				<input type="password" class="form-control" name='password' required
 					pattern="^.{6,}$" title="Minimum of 6 characters is required."
 					value="<?php if(isset($password)){ echo $password;} ?>">
 			</div>
 	
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-4">
 				<label>CONFIRM PASSWORD</label>
 				<input type="password" class="form-control" name='confirm' required
 					pattern="^.{6,}$" title="Minimum of 6 characters is required."
 					value="<?php if(isset($confirm)){ echo $confirm;} ?>">
 			</div>
 			
-			<div class="form-group col-md-6">
-				<label>SECURITY QUESTION</label>
-				<select class="form-control" name='question' required>
-					<option></option>
-					<?php
-						mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
-						mysql_select_db ($database) or die(mysql_error());
-						
-						$queryString = "SELECT * FROM securityquestions ORDER BY id desc";
-						$query = mysql_query ($queryString) or die ( mysql_error () );
-	
-						while ( $row = mysql_fetch_array ( $query ) ) {
-							$id = $row ['id'];
-							$questionoption = $row ['question'];
-							echo "<option value=" . $id . ">" . $questionoption . "</option>";
-						}
-					?>
-				</select>
-			</div>
-			
-			<div class="form-group col-md-6">
-				<label>ANSWER</label>
-				<input class="form-control text-uppercase" name='answer' required>
-			</div>
-	
 			<div class="form-group col-md-6">
 				<label>CAPTCHA</label>
 				<div class="captcha">
