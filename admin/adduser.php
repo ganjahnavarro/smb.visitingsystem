@@ -65,7 +65,7 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
 							$imageFileName = $imageFileName == null ? 'placeholder.png' : $imageFileName;
 
 							mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
-				mysql_select_db ($database) or die(mysql_error());
+							mysql_select_db ($database) or die(mysql_error());
 
 							$id = $_POST['id'];
 
@@ -73,8 +73,10 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
 								$queryreg = mysql_query ("UPDATE users set fname = '$fname', mname = '$mname', lname = '$lname', age = '$age', bday = '$bday', gender = '$gender',
 									address = '$address', contact = '$contact', username = '$username', password = '$password', imageFileName = '$imageFileName' where id = '$id'" ) or die(mysql_error());
 							} else {
-								$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, age, bday, gender, address, contact, username, password, type, date, time, imageFileName)
-									VALUES ('$fname','$mname','$lname','$age','$bday','$gender','$address','$contact','$username','$password','$type','$date','$time', '$imageFileName')" ) or die(mysql_error());
+								$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, age, bday,
+										gender, address, contact, username, password, type, date, time, imageFileName, verified)
+									VALUES ('$fname','$mname','$lname','$age','$bday',
+										'$gender','$address','$contact','$username','$password','$type','$date','$time', '$imageFileName', true)" ) or die(mysql_error());
 							}
 							echo "<div class='alert alert-success' role='alert'>Save successful</div>";
 						} else
