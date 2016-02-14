@@ -96,5 +96,7 @@
 	
         document.getElementById('username').focus();
     </script>
+    
+    <div id="disclaimer"><a id="disclaimerlink" href="disclaimer.php">DISCLAIMER</a></div>
 </body>
 </html>

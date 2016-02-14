@@ -53,9 +53,9 @@
 							
 							$imageFileName = $imageFileName == null ? 'placeholder.png' : $imageFileName;
 							
-							$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, age, bday, gender,
+							$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, bday, gender,
 									address, contact, username, email, password, type, date, time, imageFileName, verification_token)
-									VALUES ('$fname', '$mname', '$lname', '$age', '$bday', '$gender',
+									VALUES ('$fname', '$mname', '$lname', '$bday', '$gender',
 									'$address', '$contact', '$username', '$email', '$password', 'DEFAULT', '$date', '$time', '$imageFileName', '$token')" ) or die(mysql_error());
 							
 							echo "<div class='alert alert-success' role='alert'>Registration successful. Please check your inbox/spam in your email for verification.</div>";

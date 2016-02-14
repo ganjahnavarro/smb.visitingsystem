@@ -42,11 +42,11 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
 					$fname = strip_tags ( $_POST ['fname'] );
 					$mname = strip_tags ( $_POST ['mname'] );
 					$lname = strip_tags ( $_POST ['lname'] );
-					$age = strip_tags ( $_POST ['age'] );
 					$bday = strip_tags ( $_POST ['bday'] );
 					$gender = strip_tags ( $_POST ['gender'] );
 					$address = strip_tags ( $_POST ['address'] );
 					$contact = strip_tags ( $_POST ['contact'] );
+					$email = strip_tags ( $_POST ['email'] );
 					$type = strip_tags ( $_POST ['usertype'] );
 					$username = strip_tags ( $_POST ['username'] );
 					$password = strip_tags ( $_POST ['password'] );
@@ -55,14 +55,14 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
 					date_default_timezone_set ( 'Asia/Manila' );
 					$time = date ( 'h:i A' );
 
-					if ($fname && $mname && $lname && $age && $bday && $gender && $address && $contact && $type
-							&& $username && $password && $confirm && $date && $time) {
+					if ($fname && $mname && $lname && $bday && $gender && $address && $contact && $type
+							&& $email && $username && $password && $confirm && $date && $time) {
 
 						if ($password == $confirm) {
 							$password = ($password);
 							$confirm = ($confirm);
 							
-							$imageFileName = $imageFileName == null ? 'placeholder.png' : $imageFileName;
+							$imageFileName = 'placeholder.png';
 
 							mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
 							mysql_select_db ($database) or die(mysql_error());
@@ -70,12 +70,12 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
 							$id = $_POST['id'];
 
 							if($id != null){
-								$queryreg = mysql_query ("UPDATE users set fname = '$fname', mname = '$mname', lname = '$lname', age = '$age', bday = '$bday', gender = '$gender',
+								$queryreg = mysql_query ("UPDATE users set fname = '$fname', mname = '$mname', lname = '$lname', bday = '$bday', gender = '$gender', email = '$email',
 									address = '$address', contact = '$contact', username = '$username', password = '$password', imageFileName = '$imageFileName' where id = '$id'" ) or die(mysql_error());
 							} else {
-								$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, age, bday,
+								$queryreg = mysql_query ("INSERT INTO users(fname, mname, lname, bday, email,
 										gender, address, contact, username, password, type, date, time, imageFileName, verified)
-									VALUES ('$fname','$mname','$lname','$age','$bday',
+									VALUES ('$fname', '$mname', '$lname', '$bday', '$email',
 										'$gender','$address','$contact','$username','$password','$type','$date','$time', '$imageFileName', true)" ) or die(mysql_error());
 							}
 							echo "<div class='alert alert-success' role='alert'>Save successful</div>";
@@ -116,12 +116,6 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
 							<label>LASTNAME</label>
 							<input class="form-control" name='lname' required pattern="[A-Za-z ]{1,25}" title="Letters only. Up to 25 characters."
 								value="<?php if(isset($lname)){ echo $lname;} ?>">
-						</div>
-				
-						<div class="form-group col-md-4">
-							<label>AGE</label>
-							<input class="form-control" type="number" name='age' required min="0"
-								value="<?php if(isset($age)){ echo $age;} ?>">
 						</div>
 				
 						<div class="form-group col-md-4">

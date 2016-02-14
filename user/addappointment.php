@@ -65,16 +65,14 @@
 							</div>
 						</div>
 						
-						<div id="otherpurpose" class="row">
-							<div class="form-group">
-								<div class="col-md-3 text-left">
-									<h5>
-										<strong>Please Specify</strong>
-									</h5>
-								</div>
-								<div class="col-md-8">
-									<input type="text" class="form-control " name='otherpurpose' required>
-								</div>
+						<div id="otherpurpose" class="form-group">
+							<div class="col-md-4 text-left">
+								<h5>
+									<strong>Please Specify</strong>
+								</h5>
+							</div>
+							<div class="col-md-8 pad-bottom">
+								<input type="text" class="form-control " name='otherpurpose' required>
 							</div>
 						</div>
 							

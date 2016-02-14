@@ -50,3 +50,12 @@
 #disclaimer .text-warning {
     text-indent: inherit;
 }
+
+#disclaimerlink {
+	position: absolute;
+    bottom: 10px;
+    width: 200px;
+    text-align: center;
+    left: 50%;
+    color: gainsboro;
+}

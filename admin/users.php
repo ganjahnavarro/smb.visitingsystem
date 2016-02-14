@@ -66,7 +66,6 @@
 	                    <th class='active'>TYPE</th>
 	                    <th class='active'>NAME</th>
 	                    <th class='active'>GENDER</th>
-	                    <th class='active'>AGE</th>
 	                    <th class='active'>BIRTHDAY</th>
 	                    <th class='active'>ADDRESS</th>
 	                    <th class='active'>CONTACT NO</th>
@@ -95,7 +94,6 @@
 							$mname = $row ['mname'];
 							$lname = $row ['lname'];
 							$gender = $row ['gender'];
-							$age = $row ['age'];
 							$bday = $row ['bday'];
 							$add = $row ['address'];
 							$contact = $row ['contact'];
@@ -120,7 +118,7 @@
 									<td> <img src='/uploads/" . $imageFileName . "' class='user-image'> </td>
 									<td>" . $username . "</td> <td>" . $active . "</td> <td>" . $type . "</td>
 									<td>" . $fname . " " . $mname . " " . $lname . "</td>
-									<td>" . $gender . "</td> <td>" . $age . "</td> <td>" . $bday . "</td> <td>" . $add . "</td>
+									<td>" . $gender . "</td> <td>" . $bday . "</td> <td>" . $add . "</td>
 									<td>" . $contact . "</td> <td>" . $email . "</td> <td> <p title='$time'> " . $date . " </p> </td>
 									<td class='hide-on-print'>" . $actionButtonEdit . $actionButtonChangeStatus . "</td>";
 						}

@@ -12,7 +12,7 @@
 	
 	<div id="disclaimer" class="col-md-6 col-md-offset-3">
 		<p class='text-warning'><strong>No warranties</strong></p>
-		<p>This website is provided “as is” without any representations or warranties, express or implied.  San Miguel Virtual Lobby makes no representations or warranties in relation to this website or the information and materials provided on this website.</p>  
+		<p>This website is provided as is without any representations or warranties, express or implied.  San Miguel Virtual Lobby makes no representations or warranties in relation to this website or the information and materials provided on this website.</p>  
 		<p>Without prejudice to the generality of the foregoing paragraph, San Miguel Virtual Lobby does not warrant that:</p>
 			
 		<p>- This website will be constantly available, or available at all; or</p>
