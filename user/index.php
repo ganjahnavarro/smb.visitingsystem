@@ -100,7 +100,7 @@
 
 					<div class="col-xs-12 action-item">
 						<?php
-							$connect = mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
+							mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
 							mysql_select_db ($database) or die(mysql_error());
 
 							$userId = $_SESSION ['sess_user_id'];
@@ -113,9 +113,17 @@
 								$pendingappointments = 0;
 							}
 						?>
+						
+						<?php
+							try {
+								$verifiedcount = mysql_result(mysql_query("SELECT count(*) FROM users where id = '$userId' and verified = true"), 0);
+							} catch(Exception $e) {
+								$verifiedcount = 0;
+							}
+						?>
 
-						<a href="#" data-toggle="modal" data-target="#addAppointmentModal">
-							<button type="button" class="btn btn-info" <?php if($pendingappointments > 0){ echo 'disabled';} ?>>SET AN APPOINTMENT</button>
+						<a href="#" id="addAppointmentButton">
+							<button type="button" class="btn btn-info" <?php if($pendingappointments > 0 || $verifiedcount < 1){ echo 'disabled';} ?>>SET AN APPOINTMENT</button>
 						</a>
 
 						<?php if($pendingappointments > 0){ echo '<p class="help-block">You cannot set an appointment if you have still have a pending one.</p>';} ?>
@@ -123,8 +131,10 @@
 
 					<div class="col-xs-12 action-item">
 						<a href="#" data-toggle="modal" data-target="#appointmentsModal">
-							<button type="button" class="btn btn-info">VIEW MY APPOINTMENTS</button>
+							<button type="button" class="btn btn-info" <?php if($verifiedcount < 1){ echo 'disabled';} ?>>VIEW MY APPOINTMENTS</button>
 						</a>
+						
+						<?php if($verifiedcount < 1){ echo '<p class="help-block">Please verify your account to start adding an appointment.</p>';} ?>
 					</div>
 					
 					<div class="col-xs-12 action-item">
@@ -188,6 +198,36 @@
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/user/faqs.php' ); ?>
 
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/logoutmodal.php' ); ?>
+	
+	<?php 
+	
+		try {
+			$lastappointmentdate = mysql_result(mysql_query("SELECT STR_TO_DATE(CONCAT(date, ' ', timein), '%Y-%m-%d %h:%i%p') FROM visitinfo
+					where id in (SELECT visitinfoid FROM appointments where userid = '$userId' and visitinfoid is not null)
+					and date is not null order by STR_TO_DATE(CONCAT(date, ' ', timein), '%Y-%m-%d %h:%i%p')
+					desc limit 1"), 0);
+                    
+            $time = strtotime($lastappointmentdate);
+            $month = date('m', $time);
+            $month = $month - 1;
+            
+            echo "a
+                <script>
+                    var previousAppointment = new Date(" 
+                    . date('Y', $time) . ", "
+                    . $month . ", "
+                    . date('d', $time) . ", "
+                    . date('h', $time) . ", "
+                    . date('i', $time) . ", "
+                    . date('s', $time) . ", 0);
+                </script>";
+            
+            
+            
+		} catch(Exception $e) {
+			$lastappointmentdate = null;
+		}
+	?>
 
 	<script>
 		$( document ).ready(function() {
@@ -213,10 +253,31 @@
 			} else {
 				$("#otherpurpose").hide();
 			}
-		}
+		});
+        
+        $("#addAppointmentButton").click(function() {
+            var currentDateTime = new Date();
+            
+            console.log(previousAppointment);
+            
+            if(previousAppointment != null){
+                var timeDiff = Math.abs(previousAppointment.getTime() - currentDateTime.getTime());
+                var onCooldown = timeDiff < (1000 * 3600 * 3);
+            } else {
+                var onCooldown = false;
+            }
+           
+			if(onCooldown){
+				alert('You need to wait 3 hours after your appointment to before you can request another one.');
+			} else {
+				$('#addAppointmentModal').modal('show');
+			}
+		});
 
 		localStorage.setItem("retryCount", 0);
 		init();
+            
+        
 	</script>
 	
 </body>
