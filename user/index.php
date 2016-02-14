@@ -72,7 +72,7 @@
 
 	<div id="pancontainer">
 		<div>
-			<img id="smblobby" class="panzoom" src="/resources/images/guard.png" usemap="#npcs" alt="SMB">
+			<img id="smblobby" class="panzoom" src="/resources/images/guard.jpg" usemap="#npcs" alt="SMB">
 
 			<map id="npcs" class="panzoom" name="npcs">
 				<area alt="Guard" title="Guard" href="#" data-toggle="modal" data-target="#guardModal"
