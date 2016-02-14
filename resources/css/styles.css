@@ -42,3 +42,11 @@
 #captcha_code {
 	margin-top: 10px;
 }
+
+#disclaimer p {
+    text-indent: 30px;
+}
+
+#disclaimer .text-warning {
+    text-indent: inherit;
+}
