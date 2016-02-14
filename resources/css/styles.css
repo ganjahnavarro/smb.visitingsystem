@@ -57,5 +57,6 @@
     width: 200px;
     text-align: center;
     left: 50%;
+    margin-left: -100px;
     color: gainsboro;
 }
