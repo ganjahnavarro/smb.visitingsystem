@@ -11,27 +11,26 @@
 	<div class="col-md-6 col-md-offset-3">
 	<?php
 		if (isset ( $_POST ['submit'] )) {
-			$username = strip_tags ( $_POST ['username'] );
-			$question = strip_tags ( $_POST ['question'] );
-			$answer = strip_tags ( $_POST ['answer'] );
+			$username = filter_input(INPUT_GET, 'username');
+			$code = strip_tags ( $_POST ['code'] );
 			$password = strip_tags ( $_POST ['password'] );
 			$confirm = strip_tags ( $_POST ['confirm'] );
 			
 			mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
 			mysql_select_db ($database) or die(mysql_error());
 			
-			$count = mysql_result(mysql_query("SELECT count(*) FROM users where username = '$username'
-					and question = '$question' and answer = '$answer'"), 0);
+			$valid = false;
 			
-			if($count > 0){
-				if ($password == $confirm) {
-					$queryreg = mysql_query ("update users set password = '$password' where username = '$username'" ) or die(mysql_error());
-					echo "<div class='alert alert-success' role='alert'>Your password has been reset.</div>";
-				} else {
-					echo "<div class='alert alert-danger' role='alert'>Passwords do not match</div>";
-				}
+			if ($code != $_SESSION ['resetcode']){
+				echo "<div class='alert alert-danger' role='alert'>Invalid reset password code.</div>";
+			} else if ($password != $confirm){
+				echo "<div class='alert alert-danger' role='alert'>Passwords do not match.</div>";
 			} else {
-				echo "<div class='alert alert-danger' role='alert'>Invalid username, security question or answer.</div>";
+				$valid = true;
+			}
+			
+			if($valid){
+				$queryreg = mysql_query ("UPDATE users SET password = '$password' WHERE username = '$username'" ) or die(mysql_error());
 			}
 		}
 	?>
@@ -46,7 +45,7 @@
 		</div>
 	</div>
 
-	<form action='resetpassword.php' method='POST' name='form'
+	<form action='resetfinalize.php' method='POST' name='form'
 		class="col-md-6 col-md-offset-3">
 
 		<div class="form-group">
@@ -54,39 +53,12 @@
 		</div>
 		
 		<div class="form-group">
-			<label>USERNAME</label>
-			<input type="text" class="form-control text-uppercase" name="username" required
-				pattern="^.{8,}$" title="Minimum of 8 characters is required."
-				value="<?php if(isset($username)){ echo $username;} ?>">
+			<label>CODE</label>
+			<input class="form-control text-uppercase" name='code' required>
 		</div>
 		
 		<div class="form-group">
-			<label>SECURITY QUESTION</label>
-			<select class="form-control" name='question' required>
-				<option></option>
-				<?php
-					mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
-					mysql_select_db ($database) or die(mysql_error());
-					
-					$queryString = "SELECT * FROM securityquestions ORDER BY id desc";
-					$query = mysql_query ($queryString) or die ( mysql_error () );
-
-					while ( $row = mysql_fetch_array ( $query ) ) {
-						$id = $row ['id'];
-						$question = $row ['question'];
-						echo "<option value=" . $id . ">" . $question . "</option>";
-					}
-				?>
-			</select>
-		</div>
-		
-		<div class="form-group">
-			<label>ANSWER</label>
-			<input class="form-control text-uppercase" name='answer' required>
-		</div>
-		
-		<div class="form-group">
-			<label>PASSWORD</label>
+			<label>NEW PASSWORD</label>
 			<input type="password" class="form-control" name='password' required
 				pattern="^.{6,}$" title="Minimum of 6 characters is required.">
 		</div>

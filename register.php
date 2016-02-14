@@ -63,12 +63,12 @@
 							
 							require_once $_SERVER["DOCUMENT_ROOT"] . "/mail.php";
 							
-							$recipient = $address;
+							$recipient = $email;
 							
 							$headers["From"] = "noreply@rhcloud.com";
 							$headers["To"] = $recipient;
 							
-							$headers["Subject"] = "SMB Brewery";
+							$headers["Subject"] = "SMB Brewery: Account Verification";
 							$body = "Please verify your account by clicking on this link. \n
 http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&token=" . $token;
 							

@@ -34,7 +34,7 @@
 			</button>
 			<br />
 			<p class="text-center"><a href="register.php"><b>CLICK HERE TO REGISTER</b></a></p>
-			<p class="text-center"><a href="resetpassword.php"><b>FORGOT PASSWORD?</b></a></p>
+			<p class="text-center"><a href="resetsetup.php"><b>FORGOT PASSWORD?</b></a></p>
 		</div>
 		
 		<div class="form-group col-md-6 col-md-offset-3">
