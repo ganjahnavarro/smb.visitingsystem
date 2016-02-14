@@ -11,7 +11,7 @@
 	<div class="col-md-6 col-md-offset-3">
 	<?php
 		if (isset ( $_POST ['submit'] )) {
-			$username = filter_input(INPUT_GET, 'username');
+			$username = $_SESSION ['resetusername'];
 			$code = strip_tags ( $_POST ['code'] );
 			$password = strip_tags ( $_POST ['password'] );
 			$confirm = strip_tags ( $_POST ['confirm'] );
@@ -30,7 +30,9 @@
 			}
 			
 			if($valid){
+				echo "<div class='alert alert-success' role='alert'>Your password has been updated.</div>";
 				$queryreg = mysql_query ("UPDATE users SET password = '$password' WHERE username = '$username'" ) or die(mysql_error());
+				header ('Location: index.php');
 			}
 		}
 	?>
@@ -51,6 +53,8 @@
 		<div class="form-group">
 			<h4>RESET PASSWORD</h4>
 		</div>
+		
+		<p class="text-warning">Please check your inbox/spam in your email for reset password code.</p>
 		
 		<div class="form-group">
 			<label>CODE</label>

@@ -37,9 +37,10 @@
 					$mail =& Mail::factory("sendmail", $params);
 					$result = $mail->send($recipient, $headers, $body);
 					
-					header ('Location: resetfinalize.php?username=' . $username);
-					
+					$_SESSION ['resetusername'] = $username;
 					$_SESSION ['resetcode'] = $code;
+					
+					header ('Location: resetfinalize.php');
 				} else {
 					echo "<div class='alert alert-danger' role='alert'>User has no email. Contact SMB Brewery Virtual Lobby administrators.</div>";
 				}
