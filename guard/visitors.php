@@ -98,7 +98,7 @@
 						<?php
 							mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
 							mysql_select_db ($database) or die(mysql_error());
-							$output = '';
+							$output = "There was no search results!";
 
 							$startDate = '';
 							$endDate = '';
@@ -121,9 +121,9 @@
 							$query = mysql_query ($queryString) or die ( mysql_error () );
 
 							$count = mysql_num_rows ( $query );
-							if ($count == 0) {
-								$output = "There was no search results!";
-							} else {
+							if ($count != 0) {
+								$output = "";
+								
 								while ( $row = mysql_fetch_array ( $query ) ) {
 									$id = $row ['pk'];
 									$fname = $row ['firstname'];
@@ -157,7 +157,6 @@
 						<?php
 							mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
 							mysql_select_db ($database) or die(mysql_error());
-							$output = '';
 
 							$queryString = "SELECT *, v.id as pk, v.date as vdate FROM appointments a left join visitinfo v
 									on a.visitinfoid = v.id left join users u on a.userid = u.id
@@ -180,9 +179,9 @@
 							$query = mysql_query ($queryString) or die ( mysql_error () );
 
 							$count = mysql_num_rows ( $query );
-							if ($count == 0) {
-								$output = "There was no search results!";
-							} else {
+							if ($count != 0) {
+								$output = "";
+								
 								while ( $row = mysql_fetch_array ( $query ) ) {
 									$id = $row ['pk'];
 									$fname = $row ['fname'];
