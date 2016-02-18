@@ -65,14 +65,14 @@
 							</div>
 						</div>
 						
-						<div id="otherpurpose" class="form-group">
+						<div id="otherpurpose" class="form-group" style="display: none;">
 							<div class="col-md-4 text-left">
 								<h5>
 									<strong>Please Specify</strong>
 								</h5>
 							</div>
 							<div class="col-md-8 pad-bottom">
-								<input type="text" class="form-control " name='otherpurpose' required>
+								<input id="otherpurposeinput" type="text" class="form-control" name='otherpurpose'>
 							</div>
 						</div>
 							

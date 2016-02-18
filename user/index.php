@@ -249,10 +249,12 @@
 
 		$("#purpose").change(function() {
 			if($(this).val() == 'OTHERS'){
-				$("#otherpurpose").show();
+				$("#otherpurpose").css("display", "block");
+				$("#otherpurposeinput").attr("required", true);
 			} else {
-				$("#otherpurpose").hide();
-			}
+				$("#otherpurpose").css("display", "none");
+				$("#otherpurposeinput").removeAttr("required");
+            }
 		});
         
         $("#addAppointmentButton").click(function() {
