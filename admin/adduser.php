@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <?php
-session_start ();
-$role = $_SESSION ['sess_userrole'];
-if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
-	header ( 'Location: /index.php?err=2' );
-}
+	session_start ();
+	$role = $_SESSION ['sess_userrole'];
+	if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
+		header ( 'Location: /index.php?err=2' );
+	}
+	date_default_timezone_set ( 'Asia/Manila' );
 ?>
 <html>
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php' ); ?>
@@ -51,8 +52,8 @@ if (! isset ( $_SESSION ['sess_username'] ) || $role != "ADMIN") {
 					$username = strip_tags ( $_POST ['username'] );
 					$password = strip_tags ( $_POST ['password'] );
 					$confirm = strip_tags ( $_POST ['confirm'] );
+					
 					$date = date ( "Y-m-d" );
-					date_default_timezone_set ( 'Asia/Manila' );
 					$time = date ( 'h:i A' );
 
 					if ($fname && $mname && $lname && $bday && $gender && $address && $contact && $type

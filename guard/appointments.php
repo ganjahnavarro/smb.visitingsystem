@@ -5,6 +5,7 @@
 	if (! isset ( $_SESSION ['sess_username'] ) || $role != "GUARD") {
 		header ( 'Location: /index.php?err=2' );
 	}
+	date_default_timezone_set ( 'Asia/Manila' );
 ?>
 <html>
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php' ); ?>
@@ -18,7 +19,6 @@
 				mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
 				mysql_select_db ($database) or die(mysql_error());
 
-				date_default_timezone_set ('Asia/Manila');
 				$timein = date ('h:i A');
 
 				$id = $_POST ['visitInfoID'];

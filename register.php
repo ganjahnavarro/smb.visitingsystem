@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+	session_start();
+	date_default_timezone_set ( 'Asia/Manila' );
+?>
 
 <!DOCTYPE html>
 <html>
@@ -26,8 +29,8 @@
 					$username = strip_tags ( $_POST ['username'] );
 					$password = strip_tags ( $_POST ['password'] );
 					$confirm = strip_tags ( $_POST ['confirm'] );
+					
 					$date = date ( "Y-m-d" );
-					date_default_timezone_set ( 'Asia/Manila' );
 					$time = date ( 'h:i A' );
 		
 					if ($fname && $mname && $lname && $bday && $gender && $address && $contact
