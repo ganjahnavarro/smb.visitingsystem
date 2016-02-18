@@ -81,3 +81,7 @@
     padding: 20px;
     border-radius: 10px;
 }
+
+.case-sensitive {
+    text-transform: none !important;
+}

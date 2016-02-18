@@ -212,7 +212,7 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 
 	<script>
 		$(document).ready(function() {
-			$('#captcha_code').addClass('form-control');
+			$('#captcha_code').addClass('form-control case-sensitive');
 		});
 	</script>
 </body>
