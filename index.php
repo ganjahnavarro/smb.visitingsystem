@@ -3,44 +3,46 @@
 <head>
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php' ); ?>
 </head>
-<body class="bg-primary">
-	<br /> <br /> <br />
-	
-	<div class="col-md-6 col-md-offset-3">
-		<img src="/resources/images/logo.png" class="img-responsive center-block" alt="Responsive image"> <br /> <br />
-	</div>
-
-	<form action="authenticate.php" method="POST" role="form">
-		<div class="col-md-6 col-md-offset-3">
-			<p class="loginp">
-				<b>USERNAME</b>
-			</p>
-			<input id="username" class="form-control input-lg logininput" type="text" placeholder="Username" name="username">
-		</div>
-
-
-		<div class="col-md-6 col-md-offset-3">
-			<p></p>
-			<p class="loginp">
-				<b>PASSWORD</b>
-			</p>
-			<input class="form-control input-lg logininput" type="password" placeholder="Password" name="password">
-			<br/>
-		</div>
-
-		<div class="form-group col-md-6 col-md-offset-3">
-			<button type="submit" class="btn btn-info btn-block btn-lg logininput">
-				<span class="glyphicon glyphicon-off"></span> LOGIN
-			</button>
-			<br />
-			<p class="text-center"><a href="register.php"><b>CLICK HERE TO REGISTER</b></a></p>
-			<p class="text-center"><a href="resetsetup.php"><b>FORGOT PASSWORD?</b></a></p>
-		</div>
+<body class="bg-primary lobby-body">
+	<div class="lobby-background">
+		<br /> <br /> <br />
 		
-		<div class="form-group col-md-6 col-md-offset-3">
-			<p id="retryTimeRemaining"></p>
+		<div class="col-md-6 col-md-offset-3 lobby-panel">
+			<img src="/resources/images/logo.png" class="img-responsive center-block" alt="Responsive image"> <br /> <br />
+	
+			<form action="authenticate.php" method="POST" role="form">
+				<div>
+					<p class="loginp">
+						<b>USERNAME</b>
+					</p>
+					<input id="username" class="form-control input-lg logininput" type="text" placeholder="Username" name="username">
+				</div>
+				<br />
+		
+				<div>
+					<p class="loginp">
+						<b>PASSWORD</b>
+					</p>
+					<input class="form-control input-lg logininput" type="password" placeholder="Password" name="password">
+					<br/>
+				</div>
+		
+				<div class="form-group">
+					<button type="submit" class="btn btn-info btn-block btn-lg logininput">
+						<span class="glyphicon glyphicon-off"></span> LOGIN
+					</button>
+					<br />
+					<p class="text-center"><a href="register.php"><b>CLICK HERE TO REGISTER</b></a></p>
+					<p class="text-center"><a href="resetsetup.php"><b>FORGOT PASSWORD?</b></a></p>
+				</div>
+				
+				<div class="form-group">
+					<p id="retryTimeRemaining"></p>
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
+	
      <?php 
      	$errors = array (
 			1 => "Invalid user name or password, Try again",
@@ -50,7 +52,7 @@
 		$error_id = isset ( $_GET ['err'] ) ? ( int ) $_GET ['err'] : 0;
 					
 		if ($error_id == 1) {
-			echo '<div class="form-group col-md-6 col-md-offset-3"><div class="alert alert-danger">
+			echo '<div class="form-group"><div class="alert alert-danger">
 					<p><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ' . $errors [$error_id] . '</p>
 				</div></div>';
 			
@@ -60,7 +62,7 @@
 			        localStorage.setItem("retryCount", retryCount);
 				</script>';
 		} elseif ($error_id == 2) {
-			echo '<div class="form-group col-md-6 col-md-offset-3 alert alert-danger">
+			echo '<div class="form-group alert alert-danger">
 					<p><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ' . $errors [$error_id] . '</p>
 				</div>';
 		}
@@ -96,7 +98,5 @@
 	
         document.getElementById('username').focus();
     </script>
-    
-    <div id="disclaimer"><a id="disclaimerlink" href="disclaimer.php">DISCLAIMER</a></div>
 </body>
 </html>

@@ -60,3 +60,23 @@
     margin-left: -100px;
     color: gainsboro;
 }
+
+.lobby-body {
+	height: 100vh;
+	width: 100vw;
+}
+
+.lobby-background {
+    background-image: url("../images/lobby.jpg");
+    overflow: scroll;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.lobby-panel {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
