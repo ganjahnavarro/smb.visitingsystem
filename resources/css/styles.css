@@ -67,8 +67,9 @@
 }
 
 .lobby-background {
-    background-image: url("../images/lobby.jpg");
-    overflow: scroll;
+    background-image: url("../images/simplelobby.jpg");
+    overflow-y: scroll;
+    overflow-x: auto;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;

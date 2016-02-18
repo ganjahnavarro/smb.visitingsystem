@@ -40,63 +40,64 @@
 					<p id="retryTimeRemaining"></p>
 				</div>
 			</form>
-		</div>
-	</div>
+			<br />
 	
-     <?php 
-     	$errors = array (
-			1 => "Invalid user name or password, Try again",
-			2 => "Please login to access this area" 
-		);
+		     <?php 
+		     	$errors = array (
+					1 => "Invalid user name or password, Try again",
+					2 => "Please login to access this area" 
+				);
+							
+				$error_id = isset ( $_GET ['err'] ) ? ( int ) $_GET ['err'] : 0;
+							
+				if ($error_id == 1) {
+					echo '<div class="alert alert-danger">
+							<p><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ' . $errors [$error_id] . '</p>
+						</div>';
 					
-		$error_id = isset ( $_GET ['err'] ) ? ( int ) $_GET ['err'] : 0;
-					
-		if ($error_id == 1) {
-			echo '<div class="form-group"><div class="alert alert-danger">
-					<p><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ' . $errors [$error_id] . '</p>
-				</div></div>';
+					echo '<script>
+							var retryCount = parseInt(localStorage.getItem("retryCount"));
+					        retryCount = isNaN(retryCount) ? 1 : retryCount + 1;
+					        localStorage.setItem("retryCount", retryCount);
+						</script>';
+				} elseif ($error_id == 2) {
+					echo '<div class="alert alert-danger">
+							<p><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ' . $errors [$error_id] . '</p>
+						</div>';
+				}
+			?>  
+		
+			<script>
+				var retryCount = parseInt(localStorage.getItem("retryCount"));
+			    retryCount = isNaN(retryCount) ? 0 : retryCount;
+		
+			    if(retryCount >= 5){
+			    	window.setInterval(function(){
+			    		if(retryCount >= 5){
+			    			var timeRemaining = parseInt(localStorage.getItem("timeRemaining"));
+				    		timeRemaining = isNaN(timeRemaining) ? 300 : timeRemaining;
+		
+				    		if(timeRemaining > 1){
+				    			$(".logininput").attr("disabled", true);
+					    		
+				    			timeRemaining = timeRemaining - 1;
+					    		localStorage.setItem("timeRemaining", timeRemaining)
+						    	$('#retryTimeRemaining').html("You have incorrectly typed your username/password more than 4 times. Please wait " + timeRemaining + " seconds and try again.");
+				    		} else {
+				    			retryCount = 0;
+				    			localStorage.setItem("retryCount", retryCount);
+				    			$(".logininput").attr("disabled", false);
+					    		
+				    			localStorage.removeItem("timeRemaining");
+				    			$('#retryTimeRemaining').html("");
+				    		}
+			    		}
+		    		}, 1000);
+			    }
 			
-			echo '<script>
-					var retryCount = parseInt(localStorage.getItem("retryCount"));
-			        retryCount = isNaN(retryCount) ? 1 : retryCount + 1;
-			        localStorage.setItem("retryCount", retryCount);
-				</script>';
-		} elseif ($error_id == 2) {
-			echo '<div class="form-group alert alert-danger">
-					<p><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ' . $errors [$error_id] . '</p>
-				</div>';
-		}
-	?>  
-
-	<script>
-		var retryCount = parseInt(localStorage.getItem("retryCount"));
-	    retryCount = isNaN(retryCount) ? 0 : retryCount;
-
-	    if(retryCount >= 5){
-	    	window.setInterval(function(){
-	    		if(retryCount >= 5){
-	    			var timeRemaining = parseInt(localStorage.getItem("timeRemaining"));
-		    		timeRemaining = isNaN(timeRemaining) ? 300 : timeRemaining;
-
-		    		if(timeRemaining > 1){
-		    			$(".logininput").attr("disabled", true);
-			    		
-		    			timeRemaining = timeRemaining - 1;
-			    		localStorage.setItem("timeRemaining", timeRemaining)
-				    	$('#retryTimeRemaining').html("You have incorrectly typed your username/password more than 4 times. Please wait " + timeRemaining + " seconds and try again.");
-		    		} else {
-		    			retryCount = 0;
-		    			localStorage.setItem("retryCount", retryCount);
-		    			$(".logininput").attr("disabled", false);
-			    		
-		    			localStorage.removeItem("timeRemaining");
-		    			$('#retryTimeRemaining').html("");
-		    		}
-	    		}
-    		}, 1000);
-	    }
-	
-        document.getElementById('username').focus();
-    </script>
+		        document.getElementById('username').focus();
+		    </script>
+    	</div>
+	</div>
 </body>
 </html>
