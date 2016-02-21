@@ -16,7 +16,6 @@
 				<th class='active'>TIME OUT</th>
 				<th class='active'>PASS</th>
 				<th class='active'>ISSUED BY</th>
-				<th class='active hide-on-print' width="40px">ACTION</th>
 			</thead>
 
 			<?php
@@ -54,22 +53,14 @@
 							$passno = $row ['passno'];
 							$issuedby = $row ['issuedby'];
 					
-							$actionButton = "";
-					
 							if(empty($plateno) == false){
 								$gate = $gate . " (" . $plateno . ")";
 							}
 							
-							if ($timeout == null) {
-								$actionButton = "<a href='#' data-toggle='modal' data-target='#timeOutModal'
-								data-pk='" . $id . "' data-name='" . $fname . ' ' . $lname . "'>
-								<button class='btn btn-danger'><span class='glyphicon glyphicon-off'></span></button></a>";
-							}
-					
 							echo "<tr class='h6'><td>" . $fname . " " . $lname . "</td>
 								<td>" . $add . "</td> <td>" . $per . "</td> <td>" . $pur . "</td> <td>" . $dep . "</td> <td>" . $gate . "</td>
 								<td>" . $date . "</td> <td>" . $time . "</td> <td>" . $timeout . "</td>
-								<td>" . $passno . "</td> <td>" . $issuedby . "</td> <td class='hide-on-print'>" . $actionButton . "</td>";
+								<td>" . $passno . "</td> <td>" . $issuedby . "</td>";
 						}
 					}
 				}
@@ -110,22 +101,14 @@
 							$passno = $row ['passno'];
 							$issuedby = $row ['issuedby'];
 					
-							$actionButton = "";
-							
 							if(empty($plateno) == false){
 								$gate = $gate . " (" . $plateno . ")";
-							}
-					
-							if ($timeout == null) {
-								$actionButton = "<a href='#' data-toggle='modal' data-target='#timeOutModal'
-								data-pk='" . $id . "' data-name='" . $fname . ' ' . $lname . "'>
-								<button class='btn btn-danger'><span class='glyphicon glyphicon-off'></span></button></a>";
 							}
 					
 							echo "<tr class='h6'><td>" . $fname . " " . $lname . "</td>
 								<td>" . $add . "</td> <td>" . $per . "</td> <td>" . $pur . "</td> <td>" . $dep . "</td> <td>" . $gate . "</td>
 								<td>" . $date . "</td> <td>" . $time . "</td> <td>" . $timeout . "</td>
-								<td>" . $passno . "</td> <td>" . $issuedby . "</td> <td class='hide-on-print'>" . $actionButton . "</td>";
+								<td>" . $passno . "</td> <td>" . $issuedby . "</td>";
 						}
 					}
 				}

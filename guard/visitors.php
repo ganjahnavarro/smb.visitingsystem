@@ -56,17 +56,17 @@
 			<div class="clearfix"></div>
 
 			<div class="row">
-				<form action="visitors.php" method="POST">
+				<form id="searchForm" action="visitors.php" method="POST">
 					<div class="col-md-4 hide-on-print">
 						<div class="datepicker">
-							<input name="startDate" class="form-control" placeholder="Start Date" required
+							<input id="startDate" name="startDate" class="form-control" placeholder="Start Date" required
 								value="<?php echo $startDate; ?>"/>
 						</div>
 					</div>
 
 					<div class="col-md-4 hide-on-print">
 						<div class="datepicker">
-							<input name="endDate" class="form-control" placeholder="End Date" required
+							<input id="endDate" name="endDate" class="form-control" placeholder="End Date" required
 								value="<?php echo $endDate; ?>"/>
 						</div>
 					</div>
@@ -75,7 +75,7 @@
 						<div class="input-group">
 							<input type="text" name="search" class="form-control" placeholder="Type here..." id="searchInput" >
 							<span class="input-group-btn">
-								<button class="btn btn-primary" name="submit" type="submit" id="searchBtn">Search</button>
+								<button class="btn btn-primary">Search</button>
 							</span>
 						</div>
 					</div>
@@ -163,7 +163,14 @@
         });
 
         $(function() {
-			$(".datepicker input").datepicker();
+        	$(".datepicker input").datepicker({
+           		onSelect: function(dateText) {
+                    if($("#startDate").val() != null && $("#endDate").val() != null){
+                        console.log("submit..");
+                        $("#searchForm").submit();   
+                    }
+            	}
+            });
 		});
     </script>
 
