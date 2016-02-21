@@ -227,7 +227,7 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 
 		window.setInterval(function(){
 			var date = new Date();
-			var d = date.getMonth() + "/" + date.getDate() + "/" + date.getYear();
+			var d = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
 			var t = date.getHours( )+ ":" + date.getMinutes() + ":" + date.getSeconds();
 			$("#currentTime").html(d + " " + t);
 		}, 1000);
