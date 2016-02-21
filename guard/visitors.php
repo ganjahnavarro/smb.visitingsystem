@@ -14,6 +14,14 @@
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/guard/navbar.php' ); ?>
 
 	<?php
+		if($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST ['startDate']) && isset ($_POST ['endDate'])){
+			$startDate = $_POST ['startDate'];
+			$endDate = $_POST ['endDate'];
+		} else {
+			$startDate = getdate();
+			$endDate = getdate();
+		}
+	
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			if (isset ($_POST ['timeOutID']) && $_POST ['timeOutID'] != null) {
 				mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
@@ -52,14 +60,14 @@
 					<div class="col-md-4 hide-on-print">
 						<div class="datepicker">
 							<input name="startDate" class="form-control" placeholder="Start Date" required
-								value="<?php if(isset ($_POST ['startDate'])){ echo $_POST ['startDate'];} ?>"/>
+								value="<?php echo $startDate; ?>"/>
 						</div>
-					</div>
+					</div>s
 
 					<div class="col-md-4 hide-on-print">
 						<div class="datepicker">
 							<input name="endDate" class="form-control" placeholder="End Date" required
-								value="<?php if(isset ($_POST ['endDate'])){ echo $_POST ['endDate'];} ?>"/>
+								value="<?php echo $endDate; ?>"/>
 						</div>
 					</div>
 
@@ -100,23 +108,12 @@
 							mysql_select_db ($database) or die(mysql_error());
 							$output = "There was no search results!";
 
-							$startDate = '';
-							$endDate = '';
+							$mysqlStartDate = date("Y-m-d", strtotime($startDate));
+							$mysqlEndDate = date("Y-m-d", strtotime($endDate));
 
-							$queryString = "SELECT *, v.id as pk FROM walkinvisitors w left join visitinfo v
-								on w.visitinfoid = v.id ORDER BY v.id desc";
-
-							if(isset ($_POST ['startDate']) && isset ($_POST ['endDate'])){
-								$startDate = $_POST ['startDate'];
-								$endDate = $_POST ['endDate'];
-
-								$mysqlStartDate = date("Y-m-d", strtotime($startDate));
-								$mysqlEndDate = date("Y-m-d", strtotime($endDate));
-
-								$queryString = "SELECT *, v.id as pk FROM walkinvisitors w left join visitinfo v on w.visitinfoid = v.id
-									where v.date between '$mysqlStartDate' and '$mysqlEndDate'
-									ORDER BY v.id desc";
-							}
+							$queryString = "SELECT *, v.id as pk FROM walkinvisitors w left join visitinfo v on w.visitinfoid = v.id
+								where v.date between '$mysqlStartDate' and '$mysqlEndDate'
+								ORDER BY v.id desc";
 
 							$query = mysql_query ($queryString) or die ( mysql_error () );
 
@@ -158,23 +155,13 @@
 							mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
 							mysql_select_db ($database) or die(mysql_error());
 
+							$mysqlStartDate = date("Y-m-d", strtotime($startDate));
+							$mysqlEndDate = date("Y-m-d", strtotime($endDate));
+
 							$queryString = "SELECT *, v.id as pk, v.date as vdate FROM appointments a left join visitinfo v
-									on a.visitinfoid = v.id left join users u on a.userid = u.id
-									where (a.status = 'APPROVED' or a.status = 'RESCHEDULED')
-									and v.timein is not null ORDER BY v.id desc";
-
-							if(isset ($_POST ['startDate']) && isset ($_POST ['endDate'])){
-								$startDate = $_POST ['startDate'];
-								$endDate = $_POST ['endDate'];
-
-								$mysqlStartDate = date("Y-m-d", strtotime($startDate));
-								$mysqlEndDate = date("Y-m-d", strtotime($endDate));
-
-								$queryString = "SELECT *, v.id as pk, v.date as vdate FROM appointments a left join visitinfo v
-									on a.visitinfoid = v.id left join users u on a.userid = u.id
-									where (a.status = 'APPROVED' or a.status = 'RESCHEDULED')
-									and v.timein is not null and v.date between '$mysqlStartDate' and '$mysqlEndDate' ORDER BY v.id desc";
-							}
+								on a.visitinfoid = v.id left join users u on a.userid = u.id
+								where (a.status = 'APPROVED' or a.status = 'RESCHEDULED')
+								and v.timein is not null and v.date between '$mysqlStartDate' and '$mysqlEndDate' ORDER BY v.id desc";
 
 							$query = mysql_query ($queryString) or die ( mysql_error () );
 

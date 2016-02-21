@@ -278,8 +278,6 @@
 
 		localStorage.setItem("retryCount", 0);
 		init();
-            
-        
 	</script>
 	
 </body>

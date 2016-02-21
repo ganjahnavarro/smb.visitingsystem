@@ -83,7 +83,7 @@
 								</h5>
 							</div>
 							<div class="col-md-8 pad-bottom">
-								<input class="form-control" name='person' required>
+								<input class="form-control" name='person' required pattern="[A-Za-z ]{1,255}" title="Letters only. Up to 255 characters.">
 							</div>
 						</div>
 					</div>

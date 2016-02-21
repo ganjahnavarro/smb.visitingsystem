@@ -30,6 +30,7 @@
 				$address = strip_tags ( $_POST ['address'] );
 				$genderr = strip_tags ( $_POST ['gender'] );
 				$department = strip_tags ( $_POST ['department'] );
+				$gate = strip_tags ( $_POST ['gate'] );
 				
 				$purpose = strip_tags ( $_POST ['purpose'] );
 				$otherpurpose = strip_tags ( $_POST ['otherpurpose'] );
@@ -45,7 +46,7 @@
 				$issuedby = $_SESSION ['sess_username'];
 
 				if ($submit) {
-				    if ($firstname && $lastname && $genderr && $address && $department && $purpose && $person && $date && $timein) {
+				    if ($firstname && $lastname && $genderr && $address && $department && $purpose && $person && $date && $timein && gate) {
 				        if (strlen ($firstname) >25||strlen ($lastname) >25||strlen ($address) >25) {
 							echo "<div class='alert alert-danger' role='alert'>Max limit for First name, Last name, and Company/Address are 25 characters</div>";
 						} else  {
@@ -54,8 +55,8 @@
 							
 							$highest_id = mysql_result(mysql_query("SELECT coalesce(MAX(id), 0) + 1 FROM visitinfo"), 0) or die(mysql_error());
 							
-							$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, purpose, persontovisit, date, timein, passno, issuedby)
-									VALUES ('$highest_id', '$department', '$purpose', '$person', '$date', '$timein', '$passno', '$issuedby')") or die(mysql_error());
+							$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, purpose, persontovisit, date, timein, passno, issuedby, gate)
+									VALUES ('$highest_id', '$department', '$purpose', '$person', '$date', '$timein', '$passno', '$issuedby', '$gate')") or die(mysql_error());
 							
 							$querywalkin = mysql_query("INSERT INTO walkinvisitors(firstname, lastname, gender, address, visitinfoid)
 									VALUES ('$firstname', '$lastname', '$genderr', '$address', '$highest_id')") or die(mysql_error());
@@ -180,7 +181,7 @@
 							</div>
 						</div>
 						
-						<div id="otherpurpose" class="row">
+						<div id="otherpurpose" class="row" style="display: none;">
 							<div class="form-group">
 								<div class="col-md-3 text-left">
 									<h5>
@@ -188,7 +189,38 @@
 									</h5>
 								</div>
 								<div class="col-md-8">
-									<input type="text" class="form-control " name='otherpurpose' required>
+									<input id="otherpurposeinput" type="text" class="form-control " name='otherpurpose' required>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group">
+								<div class="col-md-3 text-left">
+									<h5>
+										<strong>Gate</strong>
+									</h5>
+								</div>
+								<div class="col-md-8">
+									<select id="gate" class="form-control" name='gate' required>
+										<option></option>
+										<option value="PEDESTRIAN GATE">PEDESTRIAN GATE</option>
+										<option value="BREWHOUSE">BREWHOUSE</option>
+										<option value="CELLAR ENT">CELLAR ENT</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div id="plateno" class="row">
+							<div class="form-group">
+								<div class="col-md-3 text-left">
+									<h5>
+										<strong>Plate No.</strong>
+									</h5>
+								</div>
+								<div class="col-md-8">
+									<input id="platenoinput" type="text" class="form-control " name='plateno' required>
 								</div>
 							</div>
 						</div>
@@ -201,7 +233,7 @@
 									</h5>
 								</div>
 								<div class="col-md-8">
-									<input class="form-control " name='person' required>
+									<input class="form-control " name='person' required pattern="[A-Za-z ]{1,255}" title="Letters only. Up to 255 characters.">
 								</div>
 							</div>
 						</div>
@@ -239,11 +271,23 @@
 	<script>
 		$("#purpose").change(function() {
 			if($(this).val() == 'OTHERS'){
-				$("#otherpurpose").show();
+				$("#otherpurpose").css("display", "block");
+				$("#otherpurposeinput").attr("required", true);
 			} else {
-				$("#otherpurpose").hide();
-			}
-		}
+				$("#otherpurpose").css("display", "none");
+				$("#otherpurposeinput").removeAttr("required");
+	        }
+		});
+
+		$("#gate").change(function() {
+			if($(this).val() == 'PEDESTRIAN GATE'){
+				$("#plateno").css("display", "none");
+				$("#platenoinput").removeAttr("required");
+			} else {
+				$("#plateno").css("display", "block");
+				$("#platenoinput").attr("required", true);
+	        }
+		});
 	</script>
 	
 	</body>
