@@ -44,16 +44,6 @@
 		}
 	?>
 	
-	<script>
-		$(function() {
-			$("#datetime").datetimepicker({
-				controlType: 'select',
-				stepMinute: 5,
-				oneLine: true
-			});
-		});
-	</script>
-
 	<div class="container">
 		<div class="row text-left">
 			<div class="col-md-12">
@@ -168,17 +158,19 @@
 					
 					<div class='table-responsive'>
 						<table class="table table-condensed text-uppercase small sortableTable searchableTable">
-							<th class='active'>IMAGE</th>
-							<th class='active'>NAME</th>
-							<th class='active'>COMPANY</th>
-							<th class='active'>PERSON TO VISIT</th>
-							<th class='active'>PURPOSE TO VISIT</th>
-							<th class='active'>DEPARTMENT</th>
-							<th class='active'>DATE</th>
-							<th class='active'>TIME</th>
-							<th class='active'>STATUS</th>
-							<th class='active'>REASON</th>
-							<th class='active'>PROCESSED BY</th>
+							<thead>
+								<th class='active'>IMAGE</th>
+								<th class='active'>NAME</th>
+								<th class='active'>COMPANY</th>
+								<th class='active'>PERSON TO VISIT</th>
+								<th class='active'>PURPOSE TO VISIT</th>
+								<th class='active'>DEPARTMENT</th>
+								<th class='active'>DATE</th>
+								<th class='active'>TIME</th>
+								<th class='active'>STATUS</th>
+								<th class='active'>REASON</th>
+								<th class='active'>PROCESSED BY</th>
+							</thead>
 		
 							<?php
 							mysql_connect ($dbhost, $dbuser, $dbpass) or die(mysql_error());
@@ -290,6 +282,19 @@
 	        	}
 	        })
         });
+
+        var coeff = 1000 * 60 * 5;
+        var date = new Date();
+        var rounded = new Date(Math.round(date.getTime() / coeff) * coeff)
+
+		$(function() {
+			$("#datetime").datetimepicker({
+				controlType: 'select',
+                stepMinute : 5,
+				oneLine: true,
+				minDate : rounded
+			});
+		});
     </script>
     
 	</body>

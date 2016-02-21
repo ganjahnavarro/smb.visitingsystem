@@ -126,7 +126,7 @@
 							<button type="button" class="btn btn-info" <?php if($pendingappointments > 0 || $verifiedcount < 1){ echo 'disabled';} ?>>SET AN APPOINTMENT</button>
 						</a>
 
-						<?php if($pendingappointments > 0){ echo '<p class="help-block">You cannot set an appointment if you have still have a pending one.</p>';} ?>
+						<?php if($pendingappointments > 0){ echo '<p class="help-block">You cannot set an appointment if you still have a pending one.</p>';} ?>
 					</div>
 
 					<div class="col-xs-12 action-item">

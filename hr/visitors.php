@@ -62,7 +62,7 @@
 					<span class='glyphicon glyphicon-user'></span><span class='glyphicon glyphicon-user '></span> VISITORS
 				</div>
 				<div class='table-responsive'>
-					<table class='table table-condensed text-uppercase small'>
+					<table class='table table-condensed text-uppercase small sortableTable searchableTable'>
 						<thead>
 							<th class='active'>NAME</th>
 							<th class='active'>COMPANY</th>

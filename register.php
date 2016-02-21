@@ -10,7 +10,13 @@
 </head>
 <body class="bg-primary lobby-body">
 	<div class="lobby-background">
+		<div class="clearfix">
+			<p id="currentTime"></p>
+		</div>
+		
 		<br/><br/><br/>
+        
+        <script>var success = false;</script>
 		
 		<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 lobby-panel">
 			<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/upload.php' ); ?>
@@ -79,7 +85,8 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 									$params["sendmail_path"] = "/usr/lib/sendmail";
 									$mail =& Mail::factory("sendmail", $params);
 									$result = $mail->send($recipient, $headers, $body);
-									//var_dump($result);
+                                    
+                                    echo "<script>var success = true;</script>";
 								}
 							}
 						} else {
@@ -92,7 +99,7 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 			?>
 	
 			<div>
-				<a href="index.php">
+				<a id="smblogo" href="index.php">
 					<img src="/resources/images/logo.png" class="img-responsive center-block" alt="Responsive image">
 				</a>
 				<br /> <br />
@@ -204,7 +211,7 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 					
 		
 					<div class="form-group col-lg-8 col-lg-offset-2">
-						<input type="submit" class="btn btn-info btn-lg btn-block" name="submit" value="SUBMIT">
+						<input id="submit" type="submit" class="btn btn-info btn-lg btn-block" name="submit" value="SUBMIT">
 					</div>
 			
 					<br/> <br/>
@@ -216,6 +223,27 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 	<script>
 		$(document).ready(function() {
 			$('#captcha_code').addClass('form-control case-sensitive');
+		});
+
+		window.setInterval(function(){
+			var date = new Date();
+			var d = date.getMonth() + "/" + date.getDate() + "/" + date.getYear();
+			var t = date.getHours( )+ ":" + date.getMinutes() + ":" + date.getSeconds();
+			$("#currentTime").html(d + " " + t);
+		}, 1000);
+        
+        console.log("s: " + success);
+
+		$("#smblogo").click(function() {
+			if(success == false){
+                window.onbeforeunload = function() {
+                    return "Discard inputs.`";
+                };
+            }
+		});
+
+		$("#submit").click(function() {
+			window.onbeforeunload = null;
 		});
 	</script>
 </body>

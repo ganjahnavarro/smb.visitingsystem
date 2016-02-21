@@ -18,7 +18,7 @@
 			<div class="col-md-12">
 				<h1>
 					<span class="glyphicon glyphicon-edit"></span><span
-						class="glyphicon glyphicon-user"></span>REGISTER VISITOR
+						class="glyphicon glyphicon-user"></span>REGISTER VISITOR FOR WALKIN
 				</h1>
 			</div>
 			<div class="row">
@@ -31,6 +31,7 @@
 				$genderr = strip_tags ( $_POST ['gender'] );
 				$department = strip_tags ( $_POST ['department'] );
 				$gate = strip_tags ( $_POST ['gate'] );
+				$plateno = strip_tags ( $_POST ['plateno'] );
 				
 				$purpose = strip_tags ( $_POST ['purpose'] );
 				$otherpurpose = strip_tags ( $_POST ['otherpurpose'] );
@@ -46,7 +47,7 @@
 				$issuedby = $_SESSION ['sess_username'];
 
 				if ($submit) {
-				    if ($firstname && $lastname && $genderr && $address && $department && $purpose && $person && $date && $timein && gate) {
+				    if ($firstname && $lastname && $genderr && $address && $department && $purpose && $person && $date && $timein && $gate) {
 				        if (strlen ($firstname) >25||strlen ($lastname) >25||strlen ($address) >25) {
 							echo "<div class='alert alert-danger' role='alert'>Max limit for First name, Last name, and Company/Address are 25 characters</div>";
 						} else  {
@@ -55,8 +56,8 @@
 							
 							$highest_id = mysql_result(mysql_query("SELECT coalesce(MAX(id), 0) + 1 FROM visitinfo"), 0) or die(mysql_error());
 							
-							$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, purpose, persontovisit, date, timein, passno, issuedby, gate)
-									VALUES ('$highest_id', '$department', '$purpose', '$person', '$date', '$timein', '$passno', '$issuedby', '$gate')") or die(mysql_error());
+							$queryvisitinfo = mysql_query("INSERT INTO visitinfo(id, department, purpose, persontovisit, date, timein, passno, issuedby, gate, plateno)
+									VALUES ('$highest_id', '$department', '$purpose', '$person', '$date', '$timein', '$passno', '$issuedby', '$gate', '$plateno')") or die(mysql_error());
 							
 							$querywalkin = mysql_query("INSERT INTO walkinvisitors(firstname, lastname, gender, address, visitinfoid)
 									VALUES ('$firstname', '$lastname', '$genderr', '$address', '$highest_id')") or die(mysql_error());
@@ -212,7 +213,7 @@
 							</div>
 						</div>
 						
-						<div id="plateno" class="row">
+						<div id="plateno" class="row" style="display: none;">
 							<div class="form-group">
 								<div class="col-md-3 text-left">
 									<h5>

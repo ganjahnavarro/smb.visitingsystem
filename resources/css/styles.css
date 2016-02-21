@@ -85,3 +85,14 @@
 .case-sensitive {
     text-transform: none !important;
 }
+
+#currentTime {
+	color: white;
+    font-size: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-top: 10px;
+    float: right;
+}

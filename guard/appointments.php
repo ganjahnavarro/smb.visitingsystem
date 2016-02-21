@@ -37,7 +37,7 @@
 		<div class="row text-left">
 			<div class="col-md-12">
 				<h1>
-					<span class="glyphicon glyphicon-exclamation-sign"></span> APPOINTMENTS
+					<span class="glyphicon glyphicon-exclamation-sign"></span> APPROVED APPOINTMENTS
 				</h1>
 			</div>
 		</div>
