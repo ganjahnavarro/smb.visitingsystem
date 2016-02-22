@@ -74,6 +74,10 @@
 			}
 		?>
 		
+		<div class="clearfix">
+			<p id="currentTime"></p>
+		</div>
+		
 				<form action="registervisitor.php" method="POST">
 					<div class="col-md-6">
 						<h3>Personal Information</h3>
@@ -302,6 +306,13 @@
 				};
 			}
 		})
+		
+		window.setInterval(function(){
+			var date = new Date();
+			var d = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+			var t = date.getHours( )+ ":" + date.getMinutes() + ":" + date.getSeconds();
+			$("#currentTime").html(d + " " + t);
+		}, 1000);
 	</script>
 	
 	</body>
