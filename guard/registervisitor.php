@@ -10,6 +10,8 @@
 <html>
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php' ); ?>
 <body>
+	<script>var success = false;</script>
+
 	<?php $activeNav = 'register' ?>
 	<?php include( $_SERVER['DOCUMENT_ROOT'] . '/guard/navbar.php' ); ?>
 	
@@ -62,7 +64,8 @@
 							$querywalkin = mysql_query("INSERT INTO walkinvisitors(firstname, lastname, gender, address, visitinfoid)
 									VALUES ('$firstname', '$lastname', '$genderr', '$address', '$highest_id')") or die(mysql_error());
 							
-							echo ("<div class='alert alert-success' role='alert'>Save Successful</div>");
+							echo "<div class='alert alert-success' role='alert'>Save Successful</div>";
+							echo "<script>var success = true;</script>";
 						}
 				    } else {
 				    	echo "<div class='alert alert-danger' role='alert'>Please fill in all fields!</div>";
@@ -190,7 +193,7 @@
 									</h5>
 								</div>
 								<div class="col-md-8">
-									<input id="otherpurposeinput" type="text" class="form-control " name='otherpurpose' required>
+									<input id="otherpurposeinput" type="text" class="form-control " name='otherpurpose'>
 								</div>
 							</div>
 						</div>
@@ -221,7 +224,7 @@
 									</h5>
 								</div>
 								<div class="col-md-8">
-									<input id="platenoinput" type="text" class="form-control " name='plateno' required>
+									<input id="platenoinput" type="text" class="form-control " name='plateno'>
 								</div>
 							</div>
 						</div>
@@ -256,7 +259,7 @@
 						<br>
 					</div>
 					<div class="col-md-8">
-						<br> <input type="submit" class="btn btn-primary btn-block"
+						<br> <input id="submit" type="submit" class="btn btn-primary btn-block"
 							name="submit" value="SUBMIT">
 					</div>
 					<div class="col-md-2">
@@ -289,6 +292,16 @@
 				$("#platenoinput").attr("required", true);
 	        }
 		});
+
+		$(document).click(function(event) {
+			if(event.target.id == "submit"){
+				window.onbeforeunload = null;
+			} else if (success == false){
+				window.onbeforeunload = function() {
+					return "Discard inputs.";
+				};
+			}
+		})
 	</script>
 	
 	</body>

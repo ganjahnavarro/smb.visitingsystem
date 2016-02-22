@@ -164,7 +164,7 @@
 						<div id="plateno" class="form-group" style="display: none;">
 							<p class="text-uppercase">Plate No.</p>
 							<div>
-								<input id="platenoinput" type="text" class="form-control " name='plateno' required>
+								<input id="platenoinput" type="text" class="form-control " name='plateno'>
 							</div>
 						</div>
 					</div>

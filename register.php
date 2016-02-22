@@ -15,9 +15,7 @@
 		</div>
 		
 		<br/><br/><br/>
-        
-        <script>var success = false;</script>
-		
+
 		<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 lobby-panel">
 			<?php include( $_SERVER['DOCUMENT_ROOT'] . '/includes/upload.php' ); ?>
 			
@@ -85,8 +83,6 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 									$params["sendmail_path"] = "/usr/lib/sendmail";
 									$mail =& Mail::factory("sendmail", $params);
 									$result = $mail->send($recipient, $headers, $body);
-                                    
-                                    echo "<script>var success = true;</script>";
 								}
 							}
 						} else {
@@ -231,20 +227,6 @@ http://smb-virtuallobby.rhcloud.com/verification.php?username=" . $username . "&
 			var t = date.getHours( )+ ":" + date.getMinutes() + ":" + date.getSeconds();
 			$("#currentTime").html(d + " " + t);
 		}, 1000);
-        
-        console.log("s: " + success);
-
-		$("#smblogo").click(function() {
-			if(success == false){
-                window.onbeforeunload = function() {
-                    return "Discard inputs.`";
-                };
-            }
-		});
-
-		$("#submit").click(function() {
-			window.onbeforeunload = null;
-		});
 	</script>
 </body>
 </html>
