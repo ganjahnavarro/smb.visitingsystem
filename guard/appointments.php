@@ -23,9 +23,11 @@
 
 				$id = $_POST ['visitInfoID'];
 				$passNo = $_POST ['passNo'];
+				$gate = strip_tags ( $_POST ['gate'] );
+				$plateno = strip_tags ( $_POST ['plateno'] );
 				$userName = $_SESSION ['sess_username'];
 
-				$sql = "UPDATE visitinfo SET date = current_date, timein = '$timein', passNo = '$passNo', issuedby = '$userName' WHERE ID = '$id'";
+				$sql = "UPDATE visitinfo SET date = current_date, timein = '$timein', passNo = '$passNo', issuedby = '$userName', gate = '$gate', plateno = '$plateno' WHERE ID = '$id'";
 				$res = mysql_query ($sql) or die(mysql_error());
 				echo "<meta http-equiv = 'refresh' content = ''0;url=visitors.php'>";
 				header ( 'Location: appointments.php' );
@@ -138,12 +140,31 @@
 
 					<div class="modal-body">
 						<div class="form-group">
-							<p class="text-center text-uppercase">
+							<p class="text-uppercase">
 								Please input pass no. for <strong id="appointmentName"></strong>
 							</p>
 							<div>
 								<input type="text" class="form-control" name='passNo' required
 									 pattern="[A-Za-z0-9]+" title="Letters and numbers only.">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<p class="text-uppercase">Gate</p>
+							<div>
+								<select id="gate" class="form-control" name='gate' required>
+									<option></option>
+									<option value="PEDESTRIAN GATE">PEDESTRIAN GATE</option>
+									<option value="BREWHOUSE">BREWHOUSE</option>
+									<option value="CELLAR ENT">CELLAR ENT</option>
+								</select>
+							</div>
+						</div>
+						
+						<div id="plateno" class="form-group" style="display: none;">
+							<p class="text-uppercase">Plate No.</p>
+							<div>
+								<input id="platenoinput" type="text" class="form-control " name='plateno' required>
 							</div>
 						</div>
 					</div>
@@ -172,7 +193,17 @@
 	        	$('#visitInfoID').val(pk);
 	        })
         });
-    </script>
 
+		$("#gate").change(function() {
+			if($(this).val() == 'PEDESTRIAN GATE'){
+				$("#plateno").css("display", "none");
+				$("#platenoinput").removeAttr("required");
+			} else {
+				$("#plateno").css("display", "block");
+				$("#platenoinput").attr("required", true);
+	        }
+		});
+    </script>
+    
 	</body>
 </html>
